@@ -6,7 +6,7 @@
  * history. It talks to the panel's own HTTP API, so every record goes through
  * the same validation the UI uses.
  *
- *   node scripts/seed-demo.mjs [baseUrl]
+ *   node scripts/seed-demo.js [baseUrl]
  *
  * The first account it creates becomes the owner. Re-running against a panel
  * that already has data is safe: conflicts are skipped.
@@ -189,8 +189,15 @@ async function seed() {
 
   await signIn();
 
+  const existingNodes = (await call("GET", "/api/bootstrap")).payload?.nodes ?? [];
   const nodeIds = [];
   for (const node of NODES) {
+    const already = existingNodes.find((n) => n.name === node.name);
+    if (already) {
+      nodeIds.push(already.id);
+      log("node", `${node.name} (already present)`);
+      continue;
+    }
     const res = await call("POST", "/api/nodes", node);
     if (res.ok) nodeIds.push(res.payload.node.id);
     log("node", `${node.name} ${res.ok ? "✓" : `(skipped ${res.status})`}`);
@@ -215,7 +222,12 @@ async function seed() {
     log("user", `${member.username} (${member.role}) ${res.ok ? "✓" : `(skipped ${res.status})`}`);
   }
 
+  const existingServers = (await call("GET", "/api/bootstrap")).payload?.servers ?? [];
   for (const [index, spec] of SERVERS.entries()) {
+    if (existingServers.some((s) => s.name === spec.name)) {
+      log("server", `${spec.name} (already present)`);
+      continue;
+    }
     const created = await call("POST", "/api/servers", {
       name: spec.name,
       template: spec.template,
