@@ -38,6 +38,14 @@ Requirements: Node.js 22, npm 10+, and MySQL 8+ or MariaDB 10.5+.
    PORT=3001 npm run dev
    ```
 
+### No MySQL available?
+
+Set `DB_FALLBACK=sqlite` in `.env` (it is already set in `.env.example`). The
+panel then boots on Node 22's built-in SQLite engine the first time MySQL
+refuses a connection, writing to `.bt-panel/dev.sqlite`, so the whole UI is
+usable without installing a database server. Point `DATABASE_URL` at a real
+MySQL/MariaDB for production — the fallback is a development convenience only.
+
 4. Open <http://localhost:3001/register>. The first account becomes the owner. Add a node under **Settings → Nodes**, then create a Paper server under **Servers**.
 
 Useful checks:

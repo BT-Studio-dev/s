@@ -1,18 +1,33 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { ClientGate } from "@/components/panel/client-gate";
+import { PanelShell } from "@/components/panel/shell";
+import { MODE_COOKIE, parseMode } from "@/lib/panel/theme";
+import { isAdminRole, pickTheme, resolveView } from "@/lib/panel/types";
 import { getSessionUser } from "@/lib/server/auth";
-import { getSettings } from "@/lib/server/data";
-import { AdminView } from "@/components/panel/views/admin-view";
+import { getBootstrap, getSettings } from "@/lib/server/data";
+
+/**
+ * The admin area is the settings view rendered inside the panel shell. It has
+ * to go through PanelShell because every panel view reads `usePanel()`, which
+ * is only available under the provider the shell mounts.
+ */
 export default async function AdminPage() {
   const user = await getSessionUser();
   if (!user) {
     const settings = await getSettings();
-    return (
-      <div className="flex h-dvh items-center justify-center bg-[var(--glass-tint)]">
-        <div className="text-center p-8">
-          <h1 className="mb-4 text-2xl font-bold">Admin Access Required</h1>
-          <p className="text-steel">Please sign in as an admin to access the admin panel.</p>
-        </div>
-      </div>
-    );
+    return <ClientGate theme={pickTheme(settings)} initialView={resolveView("settings", "owner")} />;
   }
-  return <AdminView />;
+
+  if (!isAdminRole(user.role)) redirect("/");
+
+  const [data, store] = await Promise.all([getBootstrap(user), cookies()]);
+
+  return (
+    <PanelShell
+      initial={data}
+      initialView="settings"
+      initialModeOverride={parseMode(store.get(MODE_COOKIE)?.value)}
+    />
+  );
 }
