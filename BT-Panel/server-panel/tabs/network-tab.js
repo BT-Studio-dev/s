@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { copyText } from "@/lib/utils";
 import { Check, Copy, Network } from "lucide-react";
 import { Button, Panel, Row } from "../ui";
 
@@ -9,13 +10,9 @@ export function NetworkTab({ server }) {
   const address = `${server.ip}:${server.port}`;
 
   async function copy() {
-    try {
-      await navigator.clipboard.writeText(address);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      setCopied(false);
-    }
+    const ok = await copyText(address);
+    setCopied(ok);
+    if (ok) setTimeout(() => setCopied(false), 1500);
   }
 
   return (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { copyText } from "@/lib/utils";
 import { toast } from "sonner";
 import { Check, Copy, KeyRound } from "lucide-react";
 /**
@@ -144,11 +145,10 @@ export function ApplicationApiView() {
   const [copied, setCopied] = useState(null);
   const origin = typeof window === "undefined" ? "" : window.location.origin;
   async function copy(text) {
-    try {
-      await navigator.clipboard.writeText(text);
+    if (await copyText(text)) {
       setCopied(text);
       window.setTimeout(() => setCopied(null), 1400);
-    } catch {
+    } else {
       toast.error("Could not copy — select the text instead.");
     }
   }

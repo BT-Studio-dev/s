@@ -226,3 +226,41 @@ export async function api(url, init) {
   }
   return data;
 }
+
+/**
+ * Copy text to the clipboard.
+ *
+ * `navigator.clipboard` is unavailable on insecure origins and is blocked
+ * outright by a `clipboard-write` permissions policy (for example when the
+ * panel is embedded in an iframe), so fall back to a hidden textarea plus the
+ * legacy `execCommand` path before giving up.
+ *
+ * @returns {Promise<boolean>} whether the text made it to the clipboard.
+ */
+export async function copyText(text) {
+  const value = String(text ?? "");
+  if (!value || typeof document === "undefined") return false;
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+      return true;
+    }
+  } catch {
+    // Blocked by policy or a non-secure origin — try the fallback below.
+  }
+  try {
+    const area = document.createElement("textarea");
+    area.value = value;
+    area.setAttribute("readonly", "");
+    area.style.position = "fixed";
+    area.style.top = "-1000px";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(area);
+    return ok;
+  } catch {
+    return false;
+  }
+}

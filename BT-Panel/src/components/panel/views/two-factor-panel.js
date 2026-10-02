@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Check, Copy, KeyRound, ShieldCheck, ShieldOff, Smartphone } from "lucide-react";
-import { api } from "@/lib/utils";
+import { api, copyText } from "@/lib/utils";
 import { Spinner } from "../ui";
 
 /**
@@ -93,11 +93,10 @@ export function TwoFactorPanel() {
     }
   }
   async function copySecret() {
-    try {
-      await navigator.clipboard.writeText(secret);
+    if (await copyText(secret)) {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1400);
-    } catch {
+    } else {
       toast.error("Could not copy — type the key in by hand instead.");
     }
   }
