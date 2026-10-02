@@ -46,6 +46,20 @@ refuses a connection, writing to `.bt-panel/dev.sqlite`, so the whole UI is
 usable without installing a database server. Point `DATABASE_URL` at a real
 MySQL/MariaDB for production — the fallback is a development convenience only.
 
+### Demo data
+
+To explore a populated panel instead of an empty one, start the app and run:
+
+```bash
+npm run seed:demo            # defaults to http://127.0.0.1:3000
+npm run seed:demo -- http://localhost:3001
+```
+
+It creates an owner account (`owner` / `DemoOwner!2026`), four nodes, five
+nests, three mounts, a five-person team and eight servers with plugins,
+backups and console history — all through the panel's own API, so nothing
+bypasses validation. Re-running it against an existing panel skips conflicts.
+
 4. Open <http://localhost:3001/register>. The first account becomes the owner. Add a node under **Settings → Nodes**, then create a Paper server under **Servers**.
 
 Useful checks:
