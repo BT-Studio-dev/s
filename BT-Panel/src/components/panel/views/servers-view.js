@@ -15,7 +15,13 @@ import {
   Plus,
   X,
 } from "lucide-react";
-import { CPU_OPTIONS, DISK_OPTIONS, MEMORY_OPTIONS, SERVER_TEMPLATES } from "@/lib/panel/catalog";
+import {
+  CPU_OPTIONS,
+  DISK_OPTIONS,
+  MEMORY_OPTIONS,
+  SERVER_TEMPLATES,
+  templateLogo,
+} from "@/lib/panel/catalog";
 import { api, formatMb } from "@/lib/utils";
 import {
   PteroEmpty,
@@ -26,6 +32,7 @@ import {
   PteroStatGrid,
   PteroStatus,
 } from "@/components/pterodactyl";
+import Image from "next/image";
 import { usePanel } from "../context";
 import { ServerPanel } from "@server-panel";
 export function ServersView() {
@@ -364,6 +371,8 @@ export function ServersView() {
   );
 }
 function ServerCard({ server, pending, onPower, onOpen, t }) {
+  // Real project artwork from public/addons when we have it for this template.
+  const logo = templateLogo(server.template);
   const status =
     server.status === "running" ? "online" : server.status === "offline" ? "offline" : "loading";
   const statusLabel = t(`servers.status.${server.status}`);
@@ -372,8 +381,12 @@ function ServerCard({ server, pending, onPower, onOpen, t }) {
     <article className="glass overflow-hidden">
       <div className="flex flex-wrap items-start justify-between gap-3 border-b border-line px-4 py-4 sm:px-5">
         <div className="flex min-w-0 items-center gap-3">
-          <span className="grid size-10 shrink-0 place-items-center rounded-[12px] border border-accent/30 bg-accent/10 text-accent">
-            <ServerIcon className="size-5" />
+          <span className="grid size-10 shrink-0 place-items-center overflow-hidden rounded-[12px] border border-accent/30 bg-accent/10 text-accent">
+            {logo ? (
+              <Image src={logo} alt="" width={40} height={40} className="size-full object-cover" />
+            ) : (
+              <ServerIcon className="size-5" />
+            )}
           </span>
           <div className="min-w-0">
             <h3 className="truncate text-[14px] font-extrabold text-ice">{server.name}</h3>

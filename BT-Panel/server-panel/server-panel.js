@@ -15,8 +15,10 @@ import {
   Terminal,
   Zap,
 } from "lucide-react";
+import Image from "next/image";
 import { PteroStatus } from "@/components/pterodactyl";
 import { formatMb } from "@/lib/utils";
+import { templateLogo } from "@/lib/panel/catalog";
 import { usePanel } from "@/components/panel/context";
 import { useServerPanel } from "./use-server-panel";
 import { Button } from "./ui";
@@ -69,6 +71,7 @@ export function ServerPanel({ server: initialServer, onBack }) {
     { onServerChange: upsertServer },
   );
 
+  const logo = templateLogo(server.template);
   const running = server.status === "running";
   const transitioning = server.status === "starting" || server.status === "stopping";
 
@@ -81,6 +84,15 @@ export function ServerPanel({ server: initialServer, onBack }) {
             <Button variant="ghost" onClick={onBack} title="Back to servers">
               <ArrowLeft className="size-4" />
             </Button>
+          ) : null}
+          {logo ? (
+            <Image
+              src={logo}
+              alt=""
+              width={40}
+              height={40}
+              className="size-10 shrink-0 rounded-[12px] border border-line object-cover"
+            />
           ) : null}
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">

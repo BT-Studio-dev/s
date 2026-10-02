@@ -8,20 +8,29 @@ export const LANGUAGES = [
   {
     id: "en",
     label: "English",
+    flag: "/flags/usa.png",
   },
   {
     id: "es",
     label: "Español",
+    flag: "/flags/spain.png",
   },
   {
     id: "de",
     label: "Deutsch",
+    flag: "/flags/germany.png",
   },
   {
     id: "fr",
     label: "Français",
+    flag: "/flags/france.png",
   },
 ];
+
+/** Flag image shipped in public/flags for a language id. */
+export function languageFlag(id) {
+  return LANGUAGES.find((language) => language.id === id)?.flag ?? LANGUAGES[0].flag;
+}
 export const LANGUAGE_IDS = LANGUAGES.map((l) => l.id);
 export function parseLanguage(value) {
   return typeof value === "string" && LANGUAGE_IDS.includes(value) ? value : "en";

@@ -152,6 +152,42 @@ export const WALLPAPERS = [
   },
 ];
 
+// ── Server software artwork ─────────────────────────────────────────────────
+
+/**
+ * Logos shipped in public/addons. Keyed by the server software a template
+ * runs, so the panel can show the real project artwork instead of a generic
+ * icon.
+ */
+export const SOFTWARE_LOGOS = {
+  paper: "/addons/paper.png",
+  purpur: "/addons/purpur.png",
+  spigot: "/addons/spigot.png",
+  craftbukkit: "/addons/craftbukkit.png",
+  vanilla: "/addons/vanilla.png",
+  folia: "/addons/folia.png",
+  pufferfish: "/addons/pufferfish.png",
+  fabric: "/addons/fabric.png",
+  forge: "/addons/forge.png",
+  neoforge: "/addons/neoforge.png",
+  quilt: "/addons/quilt.png",
+  mohist: "/addons/mohist.png",
+  arclight: "/addons/arclight.png",
+  velocity: "/addons/velocity.png",
+  bungeecord: "/addons/bungeecord.png",
+  waterfall: "/addons/waterfall.png",
+};
+
+/** Template id -> the software it runs (and therefore its logo). */
+const TEMPLATE_SOFTWARE = {
+  minecraft: "paper",
+};
+
+export function templateLogo(templateId) {
+  const software = TEMPLATE_SOFTWARE[templateId];
+  return software ? SOFTWARE_LOGOS[software] : null;
+}
+
 // ── Server templates ────────────────────────────────────────────────────────
 
 export const SERVER_TEMPLATES = [
