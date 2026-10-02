@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <!-- Red, Black, and White Animated Shader Gradient -->
+    <linearGradient id="shader-grad" x1="-100%" y1="0%" x2="200%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#DC2626"/>
+      <stop offset="50%" stop-color="#000000"/>
+      <stop offset="70%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+      <animate attributeName="x1" from="-100%" to="100%" dur="2s" repeatCount="indefinite" />
+      <animate attributeName="x2" from="0%" to="200%" dur="2s" repeatCount="indefinite" />
+    </linearGradient>
+
+    <!-- Shader Glow & Shadow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.6"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .shader-bt {
+      animation: pulse 1.4s ease-in-out infinite;
+      transform-origin: 64px 64px;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(0.96); }
+      50% { transform: scale(1.02); }
+    }
+  </style>
+
+  <!-- Dark Background for Contrast -->
+  <rect width="128" height="128" rx="28" fill="#0A0A0A" stroke="#DC2626" stroke-width="2"/>
+
+  <!-- BT Logo with Shader Filter & Red-Black-White Gradient -->
+  <g class="shader-bt" fill="url(#shader-grad)" filter="url(#glow)">
+    <!-- B -->
+    <path d="M 23 35 H 46 C 55 35, 60 38, 60 45 C 60 50, 57 54, 52 56 C 58 57, 62 62, 62 68 C 62 76, 56 80, 46 80 H 23 Z M 36 45 V 53 H 45 C 48 53, 50 52, 50 49 C 50 47, 48 45, 45 45 Z M 36 62 V 70 H 46 C 50 70, 52 68, 52 66 C 52 63, 50 62, 46 62 Z"/>
+    <!-- T -->
+    <path d="M 64 35 H 106 V 45 H 91 V 80 H 79 V 45 H 64 Z"/>
+  </g>
+</svg>
