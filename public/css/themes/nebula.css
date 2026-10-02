@@ -1,0 +1,447 @@
+/* ==========================================================================
+   NEBULA THEME v2.0 FOR MPANEL
+   Ported from Nebula Blueprint (prplwtf / Nobita-Cloud)
+   Fully unlocked, with Live Visual Customizer & Dynamic Real-time CSS Properties
+   ========================================================================== */
+
+/* 1. Core Nebula Color System & CSS Variables */
+:root.theme-nebula,
+html.theme-nebula,
+.theme-nebula {
+  /* Sidebar Palette */
+  --sidebarPrimary: #ffffff;
+  --sidebarPrimaryHover: #ffffff;
+  --sidebarSecondary: #251f30;
+  --sidebarSecondaryHover: #23293e;
+  --sidebarSecondaryActive: #23293e;
+  --sidebarSecondarySelected: #b288ff;
+  --sidebarBackground: #151221;
+  --sidebarButtonActive: #b288ff;
+
+  /* Dashboard / Page Palette */
+  --pagePrimary: #e9eaee;
+  --pagePrimaryHover: #b288ff;
+  --pageSecondary: rgba(31, 30, 36, 0.85);
+  --pageSecondaryHover: rgba(43, 47, 62, 0.88);
+  --pageSecondaryActive: rgba(48, 52, 67, 0.92);
+  --pageSecondarySelected: rgba(54, 62, 87, 0.95);
+  --pageBackground: #0e0c17;
+  --pageButtonDefault: #5a24e0;
+  --pageButtonHover: #874fff;
+
+  /* Utility / Status Colors */
+  --statusOffline: #787474;
+  --statusError: #bc362f;
+  --statusStarting: #dbc025;
+  --statusOnline: #2cdd2f;
+
+  /* Geometry & Patterns */
+  --borderRadius: 14px;
+  --borderRadiusSidebar: 12px;
+  --patternSizeDashboard: 180px;
+
+  /* Mpanel Cyber Bridges */
+  --card-opacity: 0.9;
+  --card-blur: 16px;
+}
+
+/* 2. Global Document & Layout Reset for Nebula */
+html.theme-nebula body {
+  background-color: var(--pageBackground) !important;
+  color: var(--pagePrimary) !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.theme-nebula #wallpaper-layer {
+  background-color: var(--pageBackground) !important;
+  transition: background 0.3s ease;
+}
+
+/* 3. Top Navigation Bar */
+html.theme-nebula .nook-topbar,
+html.theme-nebula header {
+  background: color-mix(in srgb, var(--sidebarBackground) 88%, transparent) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--sidebarButtonActive) 20%, rgba(255, 255, 255, 0.07)) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+}
+
+/* 4. Nebula Sidebar (Wide Mode & Compact Mode) */
+html.theme-nebula .nook-sidebar,
+html.theme-nebula #main-sidebar {
+  background: var(--sidebarBackground) !important;
+  border-right: 1px solid color-mix(in srgb, var(--sidebarButtonActive) 18%, rgba(255, 255, 255, 0.06)) !important;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+}
+
+/* Nav Item Styling */
+html.theme-nebula .nook-nav-item {
+  border-radius: var(--borderRadiusSidebar) !important;
+  color: var(--sidebarPrimary) !important;
+  opacity: 0.82;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 3px;
+  border: 1px solid transparent;
+}
+
+html.theme-nebula .nook-nav-item:hover:not(.active) {
+  background: var(--sidebarSecondaryHover) !important;
+  color: #ffffff !important;
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+html.theme-nebula .nook-nav-item.active {
+  background: var(--sidebarSecondaryActive) !important;
+  color: #ffffff !important;
+  opacity: 1;
+  border-left: 3.5px solid var(--sidebarButtonActive) !important;
+  box-shadow: 0 4px 16px -2px color-mix(in srgb, var(--sidebarButtonActive) 25%, transparent);
+}
+
+html.theme-nebula .nook-nav-item.active .nook-icon-box {
+  background: var(--sidebarButtonActive) !important;
+  color: #0b0d10 !important;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--sidebarButtonActive) 60%, transparent);
+}
+
+/* Button Styles: Outline Mode */
+body.nebula-btn-outline html.theme-nebula .nook-nav-item.active,
+html.theme-nebula.nebula-btn-outline .nook-nav-item.active {
+  background: transparent !important;
+  border: 1.5px solid var(--sidebarButtonActive) !important;
+  border-left-width: 4px !important;
+}
+
+/* Button Styles: Line Mode */
+body.nebula-btn-line html.theme-nebula .nook-nav-item.active,
+html.theme-nebula.nebula-btn-line .nook-nav-item.active {
+  background: color-mix(in srgb, var(--sidebarButtonActive) 10%, transparent) !important;
+  border-left: 4px solid var(--sidebarButtonActive) !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+}
+
+/* Compact Icon Sidebar Mode */
+body.nebula-sidebar-compact #main-sidebar,
+html.theme-nebula.nebula-sidebar-compact #main-sidebar {
+  width: 76px !important;
+  min-width: 76px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+body.nebula-sidebar-compact #main-sidebar .nook-nav-item,
+html.theme-nebula.nebula-sidebar-compact #main-sidebar .nook-nav-item {
+  justify-content: center !important;
+  padding: 10px 0 !important;
+}
+
+body.nebula-sidebar-compact #main-sidebar .nook-nav-item > span,
+body.nebula-sidebar-compact #main-sidebar .nook-nav-item > .flex-1,
+body.nebula-sidebar-compact #main-sidebar #sidebar-portal-section p,
+html.theme-nebula.nebula-sidebar-compact #main-sidebar .nook-nav-item > span,
+html.theme-nebula.nebula-sidebar-compact #main-sidebar .nook-nav-item > .flex-1,
+html.theme-nebula.nebula-sidebar-compact #main-sidebar #sidebar-portal-section p {
+  display: none !important;
+}
+
+body.nebula-sidebar-compact #main-sidebar .nook-icon-box,
+html.theme-nebula.nebula-sidebar-compact #main-sidebar .nook-icon-box {
+  margin: 0 !important;
+}
+
+/* 5. Cards, Panels, and Containers */
+html.theme-nebula .glass-card,
+html.theme-nebula .glass-panel,
+html.theme-nebula .startup-card {
+  background: var(--pageSecondary) !important;
+  border: 1px solid color-mix(in srgb, var(--pagePrimaryHover) 18%, rgba(255, 255, 255, 0.08)) !important;
+  border-radius: var(--borderRadius) !important;
+  backdrop-filter: blur(var(--card-blur, 16px)) !important;
+  -webkit-backdrop-filter: blur(var(--card-blur, 16px)) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.theme-nebula .glass-card:hover {
+  background: var(--pageSecondaryHover) !important;
+  border-color: color-mix(in srgb, var(--pagePrimaryHover) 45%, rgba(255, 255, 255, 0.15)) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -8px color-mix(in srgb, var(--pagePrimaryHover) 25%, rgba(0, 0, 0, 0.7)) !important;
+}
+
+/* 6. Buttons & Interactive Controls */
+html.theme-nebula .btn-cyber {
+  background: linear-gradient(135deg, var(--pageButtonDefault) 0%, var(--pageButtonHover) 100%) !important;
+  border-radius: var(--borderRadius) !important;
+  border: 1px solid color-mix(in srgb, var(--pagePrimaryHover) 30%, transparent) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 18px -2px color-mix(in srgb, var(--pageButtonHover) 45%, transparent) !important;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+html.theme-nebula .btn-cyber:hover {
+  background: linear-gradient(135deg, var(--pageButtonHover) 0%, var(--pagePrimaryHover) 100%) !important;
+  color: #ffffff !important;
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 24px -2px color-mix(in srgb, var(--pagePrimaryHover) 65%, transparent) !important;
+}
+
+/* 7. Form Controls, Inputs, and Modals */
+html.theme-nebula .glass-input,
+html.theme-nebula .startup-input,
+html.theme-nebula .startup-select,
+html.theme-nebula select,
+html.theme-nebula textarea,
+html.theme-nebula input[type="text"],
+html.theme-nebula input[type="password"],
+html.theme-nebula input[type="email"],
+html.theme-nebula input[type="number"] {
+  background: var(--pageSecondaryActive) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--borderRadius) !important;
+  color: var(--pagePrimary) !important;
+  transition: all 0.2s ease;
+}
+
+html.theme-nebula .glass-input:focus,
+html.theme-nebula .startup-input:focus,
+html.theme-nebula .startup-select:focus,
+html.theme-nebula input:focus,
+html.theme-nebula textarea:focus,
+html.theme-nebula select:focus {
+  border-color: var(--pagePrimaryHover) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pagePrimaryHover) 35%, transparent) !important;
+  outline: none !important;
+}
+
+/* 8. Server Cards & Status Indicators */
+html.theme-nebula .server-card-status-bar {
+  height: 4px;
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  transition: background 0.3s ease;
+}
+
+/* Status Pulsing Orb */
+@keyframes nebulaPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 6px currentColor); }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+html.theme-nebula .nebula-orb {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: nebulaPulse 2.5s infinite ease-in-out;
+}
+
+html.theme-nebula .nebula-orb-online {
+  background-color: var(--statusOnline) !important;
+  color: var(--statusOnline);
+  box-shadow: 0 0 10px var(--statusOnline);
+}
+
+html.theme-nebula .nebula-orb-starting {
+  background-color: var(--statusStarting) !important;
+  color: var(--statusStarting);
+  box-shadow: 0 0 10px var(--statusStarting);
+}
+
+html.theme-nebula .nebula-orb-error {
+  background-color: var(--statusError) !important;
+  color: var(--statusError);
+  box-shadow: 0 0 10px var(--statusError);
+}
+
+html.theme-nebula .nebula-orb-offline {
+  background-color: var(--statusOffline) !important;
+  color: var(--statusOffline);
+  animation: none;
+}
+
+/* 9. Nebula Announcement Alert Banner */
+.nebula-alert-wrapper {
+  max-width: 1200px;
+  margin: 14px auto 8px auto;
+  padding: 0 16px;
+  z-index: 30;
+  transition: all 0.3s ease;
+}
+
+.nebula-alert-wrapper.sticky {
+  position: sticky;
+  top: 10px;
+}
+
+.nebula-alert-container {
+  background: var(--pageSecondary) !important;
+  border: 1px solid color-mix(in srgb, var(--pagePrimaryHover) 35%, rgba(255, 255, 255, 0.12)) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 30px !important;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--pagePrimary) !important;
+  box-shadow: 0 8px 25px -5px color-mix(in srgb, var(--pagePrimaryHover) 25%, rgba(0, 0, 0, 0.5));
+}
+
+.nebula-alert-icon {
+  font-size: 18px;
+  color: var(--pagePrimaryHover);
+  flex-shrink: 0;
+}
+
+.nebula-alert-text {
+  font-size: 13px;
+  font-weight: 500;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nebula-alert-close {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 4px;
+}
+
+.nebula-alert-close:hover {
+  opacity: 1;
+}
+
+/* 10. Magic Background Patterns (Extracted from Nebula patterns.css) */
+/* Tiles */
+.nebula-pattern-tiles {
+  --s: var(--patternSizeDashboard, 180px);
+  --c1: var(--pageSecondary);
+  --c2: var(--pageBackground);
+  --l1: #0000 48%, var(--c1) 0 52%, #0000 0;
+  --l2: #0000 1.3%, var(--c2) 0 32%, #0000 0;
+  background: linear-gradient(-45deg, var(--l2)), linear-gradient(45deg, var(--l1)), linear-gradient(45deg, var(--l2)) calc(var(--s)/2) calc(var(--s)/2), linear-gradient(-45deg, var(--l1)) var(--c2) !important;
+  background-size: calc(2*var(--s)) var(--s), var(--s) var(--s) !important;
+}
+
+/* Cubes */
+.nebula-pattern-cubes {
+  --s: var(--patternSizeDashboard, 180px);
+  --c1: var(--pageBackground);
+  --c2: var(--pageSecondaryHover);
+  --c3: var(--pageSecondary);
+  background: repeating-conic-gradient(from 30deg, #0000 0 120deg, var(--c3) 0 180deg) calc(.5*var(--s)) calc(.5*var(--s)*.577), repeating-conic-gradient(from 30deg, var(--c1) 0 60deg, var(--c2) 0 120deg, var(--c3) 0 180deg) !important;
+  background-size: var(--s) calc(var(--s)*.577) !important;
+}
+
+/* Rotated Squares */
+.nebula-pattern-rotated-squares {
+  --s: var(--patternSizeDashboard, 120px);
+  --c1: var(--pageSecondary);
+  --c2: var(--pageBackground);
+  --_g: #0000 90deg, var(--c1) 0;
+  background: conic-gradient(from 116.56deg at calc(100%/3) 0, var(--_g)), conic-gradient(from -63.44deg at calc(200%/3) 100%, var(--_g)) var(--c2) !important;
+  background-size: var(--s) var(--s) !important;
+}
+
+/* Zig-Zag */
+.nebula-pattern-zig-zag {
+  --s: calc(var(--patternSizeDashboard, 140px) / 3);
+  --c1: var(--pageBackground);
+  --c2: var(--pageSecondary);
+  --c: #0000 75%, var(--c1) 0;
+  --g1: conic-gradient(at 75% 25%, var(--c));
+  --g2: conic-gradient(at 25% 75%, var(--c));
+  background: var(--g1), var(--g1) var(--s) var(--s), var(--g2), var(--g2) var(--s) var(--s) var(--c2) !important;
+  background-size: calc(2*var(--s)) calc(2*var(--s)) !important;
+}
+
+/* Chevrons */
+.nebula-pattern-chevrons {
+  --s: calc(var(--patternSizeDashboard, 140px) / 2);
+  --c1: var(--pageBackground);
+  --c2: var(--pageSecondary);
+  --l: var(--c1) 20%, #0000 0;
+  --g: 35%, var(--c2) 0 45%, var(--c1) 0;
+  background: linear-gradient(45deg, var(--l) 45%, var(--c1) 0 70%, #0000 0), linear-gradient(-45deg, var(--l) var(--g) 70%, #0000 0), linear-gradient(45deg, var(--c1) var(--g)) !important;
+  background-size: var(--s) var(--s) !important;
+}
+
+/* Polka Dots */
+.nebula-pattern-polka {
+  --s: calc(var(--patternSizeDashboard, 120px) / 2);
+  --c1: var(--pageSecondary);
+  --c2: var(--pageBackground);
+  background: radial-gradient(var(--c1) 5px, var(--c2) 5px) !important;
+  background-size: var(--s) var(--s) !important;
+}
+
+/* Moon */
+.nebula-pattern-moon {
+  --s: calc(var(--patternSizeDashboard, 160px) / 1.5);
+  --c1: var(--pageSecondary);
+  --c2: var(--pageBackground);
+  background: radial-gradient(ellipse farthest-corner at var(--s) var(--s), var(--c1), var(--c1) 50%, var(--c2) 50%) !important;
+  background-size: var(--s) var(--s) !important;
+}
+
+/* Wavy Checkerboard */
+.nebula-pattern-wavy-checkerboard {
+  --s: calc(var(--patternSizeDashboard, 160px) / 2);
+  --c1: var(--pageBackground);
+  --c2: var(--pageSecondary);
+  --g1: /calc(2*var(--s)) calc(2*var(--s)) radial-gradient(at 100% 0, var(--c2) 17.5%, #0000 18%);
+  --g2: /calc(2*var(--s)) calc(2*var(--s)) radial-gradient(at 0 100%, var(--c2) 17.5%, #0000 18%);
+  --_s: 0 calc(var(--s)/2)/var(--s) var(--s);
+  background: calc(var(--s)/ 2) var(--s) var(--g1), calc(var(--s)/-2) 0 var(--g1), calc(var(--s)/-2) var(--s) var(--g2), calc(var(--s)/ 2) 0 var(--g2), radial-gradient(at 100% 0, var(--c1) 35%, #0000 35.5%) var(--_s), radial-gradient(at 0 100%, var(--c1) 35%, #0000 35.5%) var(--_s), repeating-conic-gradient(from 45deg, var(--c1) 0 25%, var(--c2) 0 50%) 0 0/var(--s) var(--s) !important;
+}
+
+/* L-Shape */
+.nebula-pattern-l-shape {
+  --s: calc(var(--patternSizeDashboard, 140px) / 2);
+  --c1: var(--pageBackground);
+  --c2: var(--pageSecondary);
+  --g: at calc(100%/3) 25%, #0000 75%,;
+  background: conic-gradient(var(--g) var(--c1) 0), conic-gradient(var(--g) var(--c2) 0) 0 var(--s), repeating-conic-gradient(at calc(200%/3), var(--c1) 0 25%, var(--c2) 0 50%) !important;
+  background-size: var(--s) calc(4*var(--s)/3) !important;
+}
+
+/* 11. Terminal & Logs Override */
+html.theme-nebula #terminal-card {
+  background: var(--pageBackground) !important;
+  border-color: color-mix(in srgb, var(--pagePrimaryHover) 25%, rgba(255, 255, 255, 0.08)) !important;
+}
+
+html.theme-nebula #xterm-container {
+  border-radius: var(--borderRadius) !important;
+}
+
+/* 12. Cyan Accent mapping to Nebula Primary */
+html.theme-nebula .text-cyan-400,
+html.theme-nebula .text-cyan-300 {
+  color: var(--pagePrimaryHover) !important;
+}
+
+html.theme-nebula .bg-cyan-500\/10,
+html.theme-nebula .bg-cyan-500\/20 {
+  background-color: color-mix(in srgb, var(--pagePrimaryHover) 18%, transparent) !important;
+}
+
+html.theme-nebula .border-cyan-500\/20,
+html.theme-nebula .border-cyan-500\/30,
+html.theme-nebula .border-cyan-500\/50 {
+  border-color: color-mix(in srgb, var(--pagePrimaryHover) 35%, transparent) !important;
+}
+
+html.theme-nebula .hover\:text-cyan-400:hover {
+  color: var(--pagePrimaryHover) !important;
+}
+
