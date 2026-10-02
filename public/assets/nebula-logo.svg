@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="nebula-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b288ff" />
+      <stop offset="50%" stop-color="#874fff" />
+      <stop offset="100%" stop-color="#5a24e0" />
+    </linearGradient>
+    <linearGradient id="nebula-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e9eaee" />
+      <stop offset="100%" stop-color="#b288ff" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="46" fill="#151221" stroke="url(#nebula-grad)" stroke-width="2.5" />
+  <!-- Nebula Orbit Rings -->
+  <ellipse cx="50" cy="50" rx="36" ry="18" fill="none" stroke="#874fff" stroke-width="2" stroke-dasharray="4 2" transform="rotate(-30 50 50)" opacity="0.75" />
+  <ellipse cx="50" cy="50" rx="36" ry="18" fill="none" stroke="#b288ff" stroke-width="2.5" transform="rotate(30 50 50)" />
+  <!-- Core Star / Planet -->
+  <circle cx="50" cy="50" r="14" fill="url(#nebula-grad)" filter="url(#glow)" />
+  <circle cx="50" cy="50" r="7" fill="url(#nebula-glow)" />
+  <!-- Accent Particles -->
+  <circle cx="28" cy="32" r="2.5" fill="#e9eaee" opacity="0.9" />
+  <circle cx="72" cy="68" r="2.5" fill="#e9eaee" opacity="0.9" />
+  <circle cx="74" cy="30" r="1.8" fill="#b288ff" opacity="0.8" />
+  <circle cx="26" cy="70" r="1.8" fill="#874fff" opacity="0.8" />
+</svg>
+
