@@ -110,6 +110,7 @@ export const PANEL_VIEWS = [
   "apikeys",
   "nests",
   "mounts",
+  "updates",
 ];
 /** Views only an owner or admin may open. */
 const ADMIN_VIEWS = ["settings", "locations", "users", "apikeys", "nests", "mounts"];

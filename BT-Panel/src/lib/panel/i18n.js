@@ -46,6 +46,7 @@ const STRINGS = {
     "nav.users": "Users",
     "nav.apikeys": "Application API",
     "nav.team": "Team",
+    "nav.updates": "What's New",
     "nav.account": "My Account",
     "nav.settings": "Settings",
     "group.basic": "Basic Administration",
@@ -58,6 +59,7 @@ const STRINGS = {
     "view.home": "Overview",
     "view.servers": "Servers",
     "view.team": "Team",
+    "view.updates": "What's New",
     "view.account": "My Account",
     "view.nodes": "Nodes",
     "servers.description":
@@ -210,6 +212,7 @@ const STRINGS = {
     "nav.users": "Usuarios",
     "nav.apikeys": "API de la aplicación",
     "nav.team": "Equipo",
+    "nav.updates": "Novedades",
     "nav.account": "Mi cuenta",
     "nav.settings": "Ajustes",
     "group.basic": "Administración básica",
@@ -222,6 +225,7 @@ const STRINGS = {
     "view.home": "Resumen",
     "view.servers": "Servidores",
     "view.team": "Equipo",
+    "view.updates": "Novedades",
     "view.account": "Mi cuenta",
     "view.nodes": "Nodos",
     "servers.description":
@@ -374,6 +378,7 @@ const STRINGS = {
     "nav.users": "Benutzer",
     "nav.apikeys": "Anwendungs-API",
     "nav.team": "Team",
+    "nav.updates": "Neuigkeiten",
     "nav.account": "Mein Konto",
     "nav.settings": "Einstellungen",
     "group.basic": "Grundverwaltung",
@@ -386,6 +391,7 @@ const STRINGS = {
     "view.home": "Übersicht",
     "view.servers": "Server",
     "view.team": "Team",
+    "view.updates": "Neuigkeiten",
     "view.account": "Mein Konto",
     "view.nodes": "Knoten",
     "servers.description":
@@ -539,6 +545,7 @@ const STRINGS = {
     "nav.users": "Utilisateurs",
     "nav.apikeys": "API de l'application",
     "nav.team": "Équipe",
+    "nav.updates": "Nouveautés",
     "nav.account": "Mon compte",
     "nav.settings": "Paramètres",
     "group.basic": "Administration de base",
@@ -551,6 +558,7 @@ const STRINGS = {
     "view.home": "Aperçu",
     "view.servers": "Serveurs",
     "view.team": "Équipe",
+    "view.updates": "Nouveautés",
     "view.account": "Mon compte",
     "view.nodes": "Nœuds",
     "servers.description":

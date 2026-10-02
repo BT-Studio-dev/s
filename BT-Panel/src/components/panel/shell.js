@@ -19,6 +19,7 @@ import {
   KeyRound,
   Network,
   Server,
+  Sparkles,
 } from "lucide-react";
 import Image from "next/image";
 import { LANGUAGES, languageFlag } from "@/lib/panel/i18n";
@@ -37,6 +38,7 @@ import { ApplicationApiView } from "./views/api-view";
 import { NestsView } from "./views/nests-view";
 import { MountsView } from "./views/mounts-view";
 import { ServersView } from "./views/servers-view";
+import { UpdatesView } from "./views/updates-view";
 /**
  * Sidebar groups mirror the classic admin-panel layout: a single basic entry,
  * the everyday management views, then the service controls an admin owns.
@@ -134,6 +136,13 @@ const NAV = [
     labelKey: "nav.apikeys",
   },
   {
+    id: "updates",
+    label: "What's New",
+    icon: Sparkles,
+    group: "account",
+    labelKey: "nav.updates",
+  },
+  {
     id: "team",
     label: "Team",
     icon: Users,
@@ -160,6 +169,7 @@ const TITLES = {
   apikeys: "Application API",
   nests: "Nests",
   mounts: "Mounts",
+  updates: "What's New",
 };
 export function PanelShell({
   initial,
@@ -206,6 +216,7 @@ function ShellInner() {
               {view === "apikeys" ? <ApplicationApiView /> : null}
               {view === "nests" ? <NestsView /> : null}
               {view === "mounts" ? <MountsView /> : null}
+              {view === "updates" ? <UpdatesView /> : null}
             </div>
           </main>
         </div>

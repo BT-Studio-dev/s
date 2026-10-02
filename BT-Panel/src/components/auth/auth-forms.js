@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Eye, EyeOff, KeyRound, LogIn, Mail, RotateCcw, Sparkles, UserPlus } from "lucide-react";
 import { applyTheme, getLocalModeOverride } from "@/lib/panel/theme";
-import { api, storeToken } from "@/lib/utils";
+import { LATEST, newsKind } from "@/lib/panel/news";
+import { api, cn, storeToken } from "@/lib/utils";
 import { BrandMark, Spinner } from "@/components/panel/ui";
 import { WallpaperLayer } from "@/components/panel/wallpaper-layer";
 export function AuthShell({ theme, panelName, panelLogo, title, subtitle, children }) {
@@ -32,8 +33,46 @@ export function AuthShell({ theme, panelName, panelLogo, title, subtitle, childr
           </div>
           {children}
         </div>
+        <AuthNews />
       </main>
     </div>
+  );
+}
+
+/**
+ * A compact "what's new" note under the sign-in card. Build-time data, so it
+ * costs no request and is safe to show to a signed-out visitor.
+ */
+function AuthNews() {
+  const release = LATEST;
+  return (
+    <section className="glass view-enter mt-4 w-full max-w-[380px] px-5 py-4 text-left">
+      <div className="flex items-baseline justify-between gap-2">
+        <h2 className="flex items-center gap-1.5 text-[12px] font-extrabold text-ice">
+          <Sparkles className="size-3.5 text-accent" />
+          What&apos;s new
+        </h2>
+        <span className="font-mono text-[11px] font-extrabold text-accent">{release.version}</span>
+      </div>
+      <ul className="mt-2.5 flex flex-col gap-1.5">
+        {release.items.slice(0, 3).map((item, i) => {
+          const kind = newsKind(item.kind);
+          return (
+            <li key={i} className="flex items-start gap-2">
+              <span
+                className={cn(
+                  "mt-px shrink-0 rounded-full border px-1.5 py-px text-[9px] font-extrabold",
+                  kind.className,
+                )}
+              >
+                {kind.label}
+              </span>
+              <span className="text-[11.5px] font-semibold text-steel">{item.text}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
 function PasswordInput({ id, value, onChange, autoComplete, placeholder = "••••••••" }) {

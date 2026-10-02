@@ -1,6 +1,27 @@
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-
-/** This build has no Updates view yet; avoid rendering an unsupported route. */
-export default function UpdatesPage() {
-  redirect("/");
+import { ClientGate } from "@/components/panel/client-gate";
+import { PanelShell } from "@/components/panel/shell";
+import { MODE_COOKIE, parseMode } from "@/lib/panel/theme";
+import { pickTheme, resolveView } from "@/lib/panel/types";
+import { getSessionUser } from "@/lib/server/auth";
+import { getBootstrap, getSettings } from "@/lib/server/data";
+export default async function UpdatesPage() {
+  const user = await getSessionUser();
+  if (!user) {
+    // No cookie session: the browser may still hold a token (third-party
+    // cookies blocked in an embedded preview) — let the client decide.
+    const settings = await getSettings();
+    return <ClientGate theme={pickTheme(settings)} initialView={resolveView("updates", "owner")} />;
+  }
+  const [data, store] = await Promise.all([getBootstrap(user), cookies()]);
+  const resolved = resolveView("updates", user.role);
+  if (resolved !== "updates") redirect(resolved === "home" ? "/" : `/${resolved}`);
+  return (
+    <PanelShell
+      initial={data}
+      initialView="updates"
+      initialModeOverride={parseMode(store.get(MODE_COOKIE)?.value)}
+    />
+  );
 }
