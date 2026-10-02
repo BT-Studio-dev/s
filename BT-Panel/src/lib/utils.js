@@ -194,7 +194,19 @@ export function clearCachedPanel() {
   }
 }
 
-/** JSON fetch helper — throws an Error carrying the server's message. */
+/**
+ * Error thrown by `api()`. Carries the HTTP `status` so callers can branch on
+ * the status code rather than pattern-matching a translated message.
+ */
+export class ApiError extends Error {
+  constructor(message, status) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
+  }
+}
+
+/** JSON fetch helper — throws an ApiError carrying the server's message and status. */
 export async function api(url, init) {
   // State-changing requests require this custom header; cross-origin browser
   // requests then need a CORS preflight, which this API does not authorize.
@@ -222,7 +234,7 @@ export async function api(url, init) {
       data && typeof data === "object" && "error" in data && typeof data.error === "string"
         ? data.error
         : `Request failed (${res.status})`;
-    throw new Error(message);
+    throw new ApiError(message, res.status);
   }
   return data;
 }

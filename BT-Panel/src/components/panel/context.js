@@ -24,7 +24,7 @@ import {
   PANEL_VIEWS,
 } from "@/lib/panel/types";
 import { parseLanguage, translate } from "@/lib/panel/i18n";
-import { api, clearCachedPanel, clearStoredToken } from "@/lib/utils";
+import { ApiError, api, clearCachedPanel, clearStoredToken } from "@/lib/utils";
 const PanelContext = createContext(null);
 export function usePanel() {
   const ctx = useContext(PanelContext);
@@ -280,7 +280,10 @@ export function PanelProvider({
           lastSeen: me.lastSeen,
         }));
     } catch (err) {
-      if (err instanceof Error && /session has expired/i.test(err.message)) {
+      // Branch on the status code: the message is translated, so matching on
+      // its English text silently stopped working in other languages and left
+      // the panel polling a dead session with stale data on screen.
+      if (err instanceof ApiError && (err.status === 401 || err.status === 403)) {
         clearStoredToken();
         clearCachedPanel();
         window.location.assign("/login");
