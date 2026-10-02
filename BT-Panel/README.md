@@ -44,7 +44,7 @@ Useful checks:
 
 ```bash
 npm run lint
-npm run typecheck
+
 npm run build
 PORT=3001 npm start
 ```
