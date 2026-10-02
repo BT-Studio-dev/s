@@ -7,8 +7,20 @@
     "checkJs": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@server-panel": [
+        "./server-panel/index.js"
+      ],
+      "@server-panel/*": [
+        "./server-panel/*"
+      ]
     }
   },
-  "exclude": ["node_modules", ".next", "out"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out"
+  ]
 }

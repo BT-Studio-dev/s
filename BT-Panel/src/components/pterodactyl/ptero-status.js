@@ -30,7 +30,8 @@ const STATUS = {
   },
 };
 export function PteroStatus({ status, label }) {
-  const item = STATUS[status];
+  // Unknown statuses must not crash the page that renders the badge.
+  const item = STATUS[status] ?? STATUS.warning;
   const Icon = item.icon;
   return (
     <span

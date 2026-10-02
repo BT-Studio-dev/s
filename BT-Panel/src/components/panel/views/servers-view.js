@@ -27,7 +27,7 @@ import {
   PteroStatus,
 } from "@/components/pterodactyl";
 import { usePanel } from "../context";
-import { ServerDetailView } from "./server-detail-view";
+import { ServerPanel } from "@server-panel";
 export function ServersView() {
   const { servers, nodes, isAdmin, setView, upsertServer, t, selectedServerId, openServer, closeServer } =
     usePanel();
@@ -61,7 +61,7 @@ export function ServersView() {
   const selectedServer = selectedServerId
     ? servers.find((server) => server.id === selectedServerId)
     : undefined;
-  if (selectedServer) return <ServerDetailView server={selectedServer} onBack={closeServer} />;
+  if (selectedServer) return <ServerPanel server={selectedServer} onBack={closeServer} />;
   async function power(server, action) {
     setPending({
       id: server.id,
