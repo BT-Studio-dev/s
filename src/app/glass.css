@@ -1,0 +1,195 @@
+@layer components {
+  /*
+   * Glass material system.
+   *
+   * Split out of globals.css so the panel's surface language lives in one place.
+   * Every blur here is the whole-value var(--glass-filter) — the same variable
+   * .glass has always used — because the production CSS minifier drops
+   * shorthands that put var() inside a filter function, which silently disabled
+   * the Glass Blur control once already. Never inline a literal blur() below.
+   */
+
+  /* ── Glass ─────────────────────────────────────────────────────────────── */
+  .glass {
+    background: rgb(var(--glass-tint) / calc(0.72 * var(--glass-opacity)));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--panel-radius);
+    box-shadow: var(--glass-shadow);
+  }
+
+  /*
+   * Glass blur lives in its own @supports rule and is applied as a whole value
+   * through --glass-filter: CSS optimisation in the production bundle dropped
+   * the original shorthand (var() used inside filter functions) straight out of
+   * .glass, which silently left the Glass Blur control doing nothing at all.
+   */
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .glass {
+      -webkit-backdrop-filter: var(--glass-filter);
+      backdrop-filter: var(--glass-filter);
+    }
+  }
+
+  /* No backdrop-filter support: use a more solid panel instead of glass. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass {
+      background: rgb(var(--glass-tint) / calc(0.95 * var(--glass-opacity)));
+    }
+  }
+
+  .glass-strong {
+    background: rgb(var(--glass-tint) / calc(0.92 * var(--glass-opacity)));
+  }
+
+  .glass-soft {
+    background: rgb(var(--glass-tint) / calc(0.5 * var(--glass-opacity)));
+  }
+
+  /*
+   * Modals need to fully block the page behind them. `.glass` is translucent on
+   * purpose (so its backdrop-filter can blur what's behind), but stacking it on
+   * a `.glass-strong` variant over a darkened scrim still leaves content
+   * bleeding through at the default 62% opacity. Force a near-solid panel and
+   * drop the backdrop-filter so the dialog content is never see-through.
+   */
+  .glass-modal {
+    background-color: rgb(10 12 20 / 1);
+    background: rgb(var(--glass-tint) / 1);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      0 24px 64px rgb(0 0 0 / 0.6),
+      inset 0 1px 0 var(--glass-shine);
+  }
+
+  /*
+   * Settings/engine tab pills. They sit directly on a `.glass` panel, so a flat
+   * fill read as a dead grey chip; the translucent tint, hairline border and
+   * top shine make them read as the same material as the panel around them.
+   *
+   * The blur comes from var(--glass-filter), the same whole-value variable
+   * .glass uses, so the Glass Blur / Saturate controls reach these too. A
+   * hard-coded `blur(10px)` here would silently opt them out of the control.
+   */
+  .pill-tab {
+    min-height: 40px;
+    border-radius: 999px;
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-dim);
+    background: rgb(var(--glass-tint) / calc(0.38 * var(--glass-opacity)));
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-shine);
+    transition:
+      background 150ms ease,
+      color 150ms ease,
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .pill-tab {
+      -webkit-backdrop-filter: var(--glass-filter);
+      backdrop-filter: var(--glass-filter);
+    }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .pill-tab {
+      background: rgb(var(--glass-tint) / calc(0.82 * var(--glass-opacity)));
+    }
+  }
+
+  .pill-tab:hover {
+    color: var(--text-primary);
+    background: rgb(var(--glass-tint) / calc(0.58 * var(--glass-opacity)));
+    border-color: rgb(255 255 255 / 0.26);
+  }
+
+  .pill-tab.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.3);
+    box-shadow:
+      0 4px 14px var(--accent-glow),
+      inset 0 1px 0 rgb(255 255 255 / 0.28);
+  }
+
+
+  .select-tile {
+    border: 1px solid var(--glass-border);
+    background: rgb(var(--glass-tint) / calc(0.34 * var(--glass-opacity)));
+    border-radius: 12px;
+    box-shadow: inset 0 1px 0 var(--glass-shine);
+    transition:
+      border-color 150ms ease,
+      background 150ms ease,
+      box-shadow 150ms ease;
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .select-tile {
+      -webkit-backdrop-filter: var(--glass-filter);
+      backdrop-filter: var(--glass-filter);
+    }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .select-tile {
+      background: rgb(var(--glass-tint) / calc(0.8 * var(--glass-opacity)));
+    }
+  }
+
+  .select-tile:hover {
+    border-color: rgb(255 255 255 / 0.26);
+  }
+
+  .select-tile.active {
+    border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    box-shadow:
+      0 0 0 3px var(--accent-glow),
+      inset 0 1px 0 var(--glass-shine);
+  }
+
+
+  /* Category chips in the wallpaper catalog — same pill language as .pill-tab. */
+  .chip-tab {
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    background: rgb(var(--glass-tint) / calc(0.34 * var(--glass-opacity)));
+    color: var(--text-dim);
+    box-shadow: inset 0 1px 0 var(--glass-shine);
+    transition:
+      background 150ms ease,
+      color 150ms ease,
+      border-color 150ms ease;
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .chip-tab {
+      -webkit-backdrop-filter: var(--glass-filter);
+      backdrop-filter: var(--glass-filter);
+    }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .chip-tab {
+      background: rgb(var(--glass-tint) / calc(0.8 * var(--glass-opacity)));
+    }
+  }
+
+  .chip-tab:hover {
+    color: var(--text-primary);
+    border-color: rgb(255 255 255 / 0.26);
+  }
+
+  .chip-tab.active {
+    border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--text-primary);
+  }
+
+}
