@@ -109,6 +109,7 @@ export function PanelProvider({
   initialView,
   initialModeOverride,
   initialSettingsTab,
+  initialServerId,
   children,
 }) {
   const [profile, setProfile] = useState(initial.profile);
@@ -121,6 +122,9 @@ export function PanelProvider({
   const [userCount, setUserCount] = useState(initial.userCount);
   const [view, setViewState] = useState(initialView);
   const [settingsTab, setSettingsTabState] = useState(initialSettingsTab ?? "general");
+  // The per-server panel is addressable at /server/<id>, so the open server is
+  // state here rather than inside ServersView.
+  const [selectedServerId, setSelectedServerIdState] = useState(initialServerId ?? null);
   // Sidebar collapse is persisted in localStorage, which does not exist during
   // SSR. Reading it in a lazy initializer made the first client render disagree
   // with the server HTML (collapsed -> "flex-col" vs "justify-between") and
@@ -212,6 +216,7 @@ export function PanelProvider({
   const setView = useCallback(
     (next) => {
       const allowed = resolveView(next, profile.role);
+      setSelectedServerIdState(null);
       setViewState(allowed);
       setMobileOpen(false);
       navigate(allowed, settingsTab);
@@ -219,10 +224,25 @@ export function PanelProvider({
     [navigate, profile.role, settingsTab],
   );
 
+  const openServer = useCallback((id) => {
+    setSelectedServerIdState(id);
+    setViewState("servers");
+    setMobileOpen(false);
+    window.history.pushState(null, "", `/server/${encodeURIComponent(id)}`);
+  }, []);
+
+  const closeServer = useCallback(() => {
+    setSelectedServerIdState(null);
+    setViewState("servers");
+    window.history.pushState(null, "", "/servers");
+  }, []);
+
   // Back/forward must restore the view, otherwise the URL and the rendered
   // view drift apart after the pushState calls above.
   useEffect(() => {
     const onPopState = () => {
+      const serverMatch = /^\/server\/([^/?#]+)/.exec(window.location.pathname);
+      setSelectedServerIdState(serverMatch ? decodeURIComponent(serverMatch[1]) : null);
       const { view: next, tab } = readViewFromLocation();
       setViewState(resolveView(next, profile.role));
       if (tab) setSettingsTabState(tab);
@@ -350,6 +370,9 @@ export function PanelProvider({
     isAdmin,
     view,
     setView,
+    selectedServerId,
+    openServer,
+    closeServer,
     settingsTab,
     setSettingsTab,
     sidebarCollapsed,

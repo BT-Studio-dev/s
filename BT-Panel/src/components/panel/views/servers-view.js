@@ -29,11 +29,11 @@ import {
 import { usePanel } from "../context";
 import { ServerDetailView } from "./server-detail-view";
 export function ServersView() {
-  const { servers, nodes, isAdmin, setView, upsertServer, t } = usePanel();
+  const { servers, nodes, isAdmin, setView, upsertServer, t, selectedServerId, openServer, closeServer } =
+    usePanel();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("all");
   const [pending, setPending] = useState(null);
-  const [selectedServerId, setSelectedServerId] = useState(null);
   const [createOpen, setCreateOpen] = useState(false);
   const [createPending, setCreatePending] = useState(false);
   const [newName, setNewName] = useState("");
@@ -61,8 +61,7 @@ export function ServersView() {
   const selectedServer = selectedServerId
     ? servers.find((server) => server.id === selectedServerId)
     : undefined;
-  if (selectedServer)
-    return <ServerDetailView server={selectedServer} onBack={() => setSelectedServerId(null)} />;
+  if (selectedServer) return <ServerDetailView server={selectedServer} onBack={closeServer} />;
   async function power(server, action) {
     setPending({
       id: server.id,
@@ -354,7 +353,7 @@ export function ServersView() {
                 server={server}
                 pending={pending?.id === server.id ? pending.action : null}
                 onPower={power}
-                onOpen={() => setSelectedServerId(server.id)}
+                onOpen={() => openServer(server.id)}
                 t={t}
               />
             ))}

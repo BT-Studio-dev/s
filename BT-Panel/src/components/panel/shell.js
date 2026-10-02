@@ -161,13 +161,20 @@ const TITLES = {
   nests: "Nests",
   mounts: "Mounts",
 };
-export function PanelShell({ initial, initialView, initialModeOverride, initialSettingsTab }) {
+export function PanelShell({
+  initial,
+  initialView,
+  initialModeOverride,
+  initialSettingsTab,
+  initialServerId,
+}) {
   return (
     <PanelProvider
       initial={initial}
       initialView={initialView}
       initialModeOverride={initialModeOverride}
       initialSettingsTab={initialSettingsTab}
+      initialServerId={initialServerId}
     >
       <ShellInner />
     </PanelProvider>
