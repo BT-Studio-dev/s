@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title id="tab-title">Mpanel</title>
+  <link id="tab-favicon" rel="icon" type="image/png" href="/images/meta/Logo.png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- xterm.js -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.min.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Ace Editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.js"></script>
+
+  <!-- Fonts for LiquidX Theme (Cinzel & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/style.css?v=3.5.5">
+  <link rel="stylesheet" href="/css/themes/nebula.css?v=2.0.0">
+  <link rel="stylesheet" href="/css/themes/dezerx.css?v=1.0.0">
+  <link rel="stylesheet" href="/css/themes/lucent.css?v=2.0.0">
+</head>
+<body class="h-screen max-h-screen overflow-hidden text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-white">
+
+  <!-- Wallpaper and Overlay Background Layers -->
+  <div id="wallpaper-layer"></div>
+  <video id="wallpaper-video" autoplay muted loop playsinline class="hidden"></video>
+  <div id="overlay-layer"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-5 right-5 z-[99999] flex flex-col gap-3 pointer-events-none max-w-[calc(100vw-24px)]"></div>
+
+  <!-- Top Navigation Header (NookTheme) -->
+  <header id="main-header" class="nook-topbar bg-[#17171b] border-b border-white/10 shrink-0 z-30 px-5 py-2.5 flex items-center justify-between">
+    <!-- Brand / Logo & Server Title -->
+    <div class="flex items-center gap-3 cursor-pointer" onclick="app.navigate('user-overview')">
+      <button onclick="event.stopPropagation(); app.toggleMobileSidebar();" class="md:hidden text-slate-400 hover:text-white p-1 mr-1">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+      <div id="header-logo-container" class="w-9 h-9 flex items-center justify-center rounded-xl bg-[#212121] border border-white/10 p-1.5 shadow-md">
+        <img id="header-logo-img" src="/images/meta/Logo.png" alt="Mpanel Logo" class="w-full h-full object-contain" onerror="this.src='/assets/logo.png'">
+      </div>
+      <div>
+        <h1 id="header-panel-name" class="text-lg font-bold tracking-wide text-white leading-tight">Angelillo15</h1>
+        <p id="header-sub-name" class="text-[10px] text-slate-400 tracking-wider font-medium">Mpanel Server Engine</p>
+      </div>
+    </div>
+
+    <!-- Right Header Controls (NookTheme style) -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      <!-- Quick Search Action -->
+      <button onclick="app.showServerSwitcherModal()" title="Search & Switch Servers" class="w-9 h-9 flex items-center justify-center rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition">
+        <i data-lucide="search" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Server Switcher Icon -->
+      <button onclick="app.showServerSwitcherModal()" title="Server Instances" class="w-9 h-9 flex items-center justify-center rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition">
+        <i data-lucide="layers" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Admin / Client Area Quick Switcher Toggle (Visible for Admins) -->
+      <button id="header-admin-toggle-btn" onclick="app.toggleAdminPortalMode()" class="hidden px-2.5 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 shadow-sm" title="Switch Portal Mode">
+        <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+        <span id="header-admin-toggle-label" class="hidden sm:inline">Admin Area</span>
+      </button>
+
+      <!-- Settings Icon -->
+      <button onclick="app.navigate(app.user?.role === 'admin' ? 'admin-settings' : 'user-profile')" title="Settings" class="w-9 h-9 flex items-center justify-center rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition">
+        <i data-lucide="settings" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Panel Auto Size / Device Layout Switcher -->
+      <div id="header-device-mode-container" class="relative">
+        <button id="header-device-btn" onclick="app.toggleDeviceModeDropdown(event)" title="Screen Layout: Auto Size (Phone / Tablet / PC)" class="w-9 h-9 flex items-center justify-center rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition">
+          <i id="header-device-icon" data-lucide="sparkles" class="w-4 h-4 text-cyan-400"></i>
+        </button>
+
+        <!-- Device Mode Dropdown Menu -->
+        <div id="header-device-dropdown" class="hidden absolute right-0 mt-2 w-60 bg-[#17171b] rounded-2xl py-2 shadow-2xl z-50 border border-white/10 backdrop-blur-xl">
+          <div class="px-3.5 py-2 border-b border-white/10 mb-1 flex items-center justify-between">
+            <div>
+              <p class="text-xs font-bold text-white">Panel Auto Size</p>
+              <p id="device-screen-dimensions" class="text-[10px] text-cyan-400 font-mono">Auto Scaling</p>
+            </div>
+            <span id="device-current-badge" class="text-[9px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-mono">AUTO</span>
+          </div>
+          <div class="p-1 space-y-0.5">
+            <button onclick="app.setDeviceMode('auto')" class="device-opt-btn w-full flex items-center justify-between px-3 py-2 text-xs rounded-xl text-slate-300 hover:bg-white/10 hover:text-white transition" data-mode="auto">
+              <span class="flex items-center gap-2.5">
+                <span class="w-6 h-6 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i></span>
+                <span class="font-medium text-left">
+                  <span class="block text-white font-semibold">Auto Adaptive</span>
+                  <span class="block text-[10px] text-slate-400">Auto switch by screen</span>
+                </span>
+              </span>
+              <i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400 check-icon"></i>
+            </button>
+            <button onclick="app.setDeviceMode('phone')" class="device-opt-btn w-full flex items-center justify-between px-3 py-2 text-xs rounded-xl text-slate-300 hover:bg-white/10 hover:text-white transition" data-mode="phone">
+              <span class="flex items-center gap-2.5">
+                <span class="w-6 h-6 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400"><i data-lucide="smartphone" class="w-3.5 h-3.5"></i></span>
+                <span class="font-medium text-left">
+                  <span class="block text-white font-semibold">Phone Mode</span>
+                  <span class="block text-[10px] text-slate-400">&lt; 640px compact</span>
+                </span>
+              </span>
+              <i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400 check-icon hidden"></i>
+            </button>
+            <button onclick="app.setDeviceMode('tablet')" class="device-opt-btn w-full flex items-center justify-between px-3 py-2 text-xs rounded-xl text-slate-300 hover:bg-white/10 hover:text-white transition" data-mode="tablet">
+              <span class="flex items-center gap-2.5">
+                <span class="w-6 h-6 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400"><i data-lucide="tablet" class="w-3.5 h-3.5"></i></span>
+                <span class="font-medium text-left">
+                  <span class="block text-white font-semibold">Tablet Mode</span>
+                  <span class="block text-[10px] text-slate-400">640px - 1024px</span>
+                </span>
+              </span>
+              <i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400 check-icon hidden"></i>
+            </button>
+            <button onclick="app.setDeviceMode('pc')" class="device-opt-btn w-full flex items-center justify-between px-3 py-2 text-xs rounded-xl text-slate-300 hover:bg-white/10 hover:text-white transition" data-mode="pc">
+              <span class="flex items-center gap-2.5">
+                <span class="w-6 h-6 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400"><i data-lucide="monitor" class="w-3.5 h-3.5"></i></span>
+                <span class="font-medium text-left">
+                  <span class="block text-white font-semibold">PC / Laptop</span>
+                  <span class="block text-[10px] text-slate-400">&gt; 1024px desktop</span>
+                </span>
+              </span>
+              <i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400 check-icon hidden"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme Mode Switcher Icon -->
+      <button onclick="app.toggleTheme()" id="header-theme-toggle-btn" title="Toggle Theme" class="w-9 h-9 flex items-center justify-center rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition">
+        <i data-lucide="moon" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Auth State Actions -->
+      <div id="header-auth-section" class="flex items-center gap-2">
+        <button id="header-login-btn" onclick="auth.showLoginModal()" class="btn-nook-start text-xs">
+          <i data-lucide="log-in" class="w-3.5 h-3.5"></i> Sign In
+        </button>
+      </div>
+
+      <!-- User Dropdown & Sign Out (NookTheme) -->
+      <div id="header-user-menu" class="hidden flex items-center gap-2">
+        <div class="relative">
+          <button id="user-menu-btn" onclick="app.toggleUserDropdown()" class="flex items-center gap-2 bg-[#212121] hover:bg-[#2e3039] border border-white/10 px-2.5 py-1.5 rounded-xl transition">
+            <div class="w-6 h-6 rounded-lg bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-xs font-bold text-white">
+              <span id="user-avatar-initials">A</span>
+            </div>
+            <span id="user-display-name" class="text-xs font-semibold text-slate-200 hidden sm:inline">Admin</span>
+            <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400"></i>
+          </button>
+
+          <!-- Dropdown Menu items -->
+          <div id="user-dropdown-dropdown" class="hidden absolute right-0 mt-2 w-52 bg-[#17171b] rounded-xl py-2 shadow-2xl z-50 border border-white/10">
+            <div class="px-4 py-2 border-b border-white/10 mb-1">
+              <p class="text-xs text-slate-400">Signed in as</p>
+              <p id="user-dropdown-email" class="text-xs font-semibold text-white truncate">admin@mpanel.local</p>
+              <p id="user-display-role" class="text-[10px] text-cyan-400 font-medium">Administrator</p>
+            </div>
+            <a href="#profile" onclick="app.navigate('user-profile')" class="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-300 hover:bg-white/10 hover:text-white transition">
+              <i data-lucide="user" class="w-4 h-4"></i> Account Profile
+            </a>
+            <a href="#activity" onclick="app.navigate('user-activity')" class="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-300 hover:bg-white/10 hover:text-white transition">
+              <i data-lucide="history" class="w-4 h-4"></i> Login Activity
+            </a>
+            <div id="dropdown-admin-divider" class="border-t border-white/10 my-1"></div>
+            <a id="dropdown-admin-link" href="#admin-overview" onclick="app.navigate('admin-overview')" class="flex items-center gap-2.5 px-4 py-2 text-xs text-purple-300 hover:bg-purple-500/20 transition">
+              <i data-lucide="shield" class="w-4 h-4"></i> Admin Portal
+            </a>
+            <div class="border-t border-white/10 my-1"></div>
+            <a href="javascript:void(0)" onclick="app.showDeveloperCardModal()" class="flex items-center gap-2.5 px-4 py-2 text-xs text-cyan-300 hover:bg-cyan-500/20 transition">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> Developer (Nobita)
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Logout button (NookTheme Topbar) -->
+        <button onclick="auth.logout()" title="Sign Out" class="w-9 h-9 flex items-center justify-center rounded-xl text-rose-400 hover:bg-rose-500/20 transition">
+          <i data-lucide="log-out" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Layout Body (Strict Viewport Constraint) -->
+  <div id="app-layout-body" class="flex-1 flex min-h-0 h-[calc(100vh-58px)] overflow-hidden relative">
+    <!-- Backdrop overlay for mobile drawer on phones & small tablets -->
+    <div id="sidebar-mobile-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 hidden md:hidden" onclick="app.closeMobileSidebar()"></div>
+
+    <!-- NookTheme Sidebar Navigation (Fixed height, independent scroll) -->
+    <aside id="main-sidebar" class="w-64 md:w-60 nook-sidebar flex flex-col justify-between p-3 hidden md:flex shrink-0 h-full max-h-full overflow-hidden">
+      <!-- Dedicated Independent Scrollable Sidebar Container -->
+      <div id="sidebar-scroll-container" class="space-y-4 flex-1 min-h-0 overflow-y-auto overscroll-contain pr-1 custom-scrollbar">
+        <!-- 1. Server Context Navigation (Shown when inside a server) -->
+        <div id="sidebar-server-section" class="hidden">
+          <nav class="space-y-1" id="server-nav-links">
+            <!-- Dynamically populated / updated in app.js or console.js -->
+          </nav>
+        </div>
+
+        <!-- 2. Portal Context Navigation (Shown when in dashboard / overview) -->
+        <div id="sidebar-portal-section">
+          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-3 flex items-center justify-between">
+            <span>Client Portal</span>
+            <span class="text-[9px] bg-cyan-500/10 text-cyan-400 px-1.5 py-0.5 rounded border border-cyan-500/20 font-mono">User</span>
+          </p>
+          <nav class="space-y-1">
+            <a href="#overview" onclick="app.navigate('user-overview')" id="nav-user-overview" class="nook-nav-item active">
+              <div class="nook-icon-box">
+                <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+              </div>
+              <span>Overview</span>
+            </a>
+            <a href="#servers" onclick="app.navigate('user-servers')" id="nav-user-servers" class="nook-nav-item">
+              <div class="nook-icon-box">
+                <i data-lucide="server" class="w-5 h-5"></i>
+              </div>
+              <span>My Servers</span>
+            </a>
+            <a href="#marketplace" onclick="app.navigate('marketplace')" id="nav-user-marketplace" class="nook-nav-item">
+              <div class="nook-icon-box">
+                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+              </div>
+              <span>Marketplace</span>
+            </a>
+            <a href="#tutorials" onclick="app.navigate('tutorials')" id="nav-user-tutorials" class="nook-nav-item">
+              <div class="nook-icon-box">
+                <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+              </div>
+              <span>Tutorials</span>
+            </a>
+            <a href="#profile" onclick="app.navigate('user-profile')" id="nav-user-profile" class="nook-nav-item">
+              <div class="nook-icon-box">
+                <i data-lucide="user" class="w-5 h-5"></i>
+              </div>
+              <span>Profile & 2FA</span>
+            </a>
+            <a href="#activity" onclick="app.navigate('user-activity')" id="nav-user-activity" class="nook-nav-item">
+              <div class="nook-icon-box">
+                <i data-lucide="activity" class="w-5 h-5"></i>
+              </div>
+              <span>Activity Log</span>
+            </a>
+          </nav>
+
+          <!-- Admin Switcher Card (Shown only to Administrators) -->
+          <div id="portal-admin-switch-card" class="hidden mt-4 pt-3 border-t border-white/5">
+            <button onclick="app.navigate('admin-overview')" class="w-full p-2.5 rounded-xl bg-gradient-to-r from-purple-900/30 to-indigo-900/30 hover:from-purple-900/50 hover:to-indigo-900/50 border border-purple-500/30 text-purple-200 text-xs font-semibold flex items-center justify-between transition group shadow-sm">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-300">
+                  <i data-lucide="shield" class="w-4 h-4"></i>
+                </div>
+                <span>Administration</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-purple-400 group-hover:translate-x-0.5 transition-transform"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Dedicated Administration Navigation (Separate Admin Sidebar) -->
+        <div id="sidebar-admin-section" class="hidden space-y-4">
+
+          <!-- Section 1: Basic Administration -->
+          <div class="space-y-1">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-1">
+              Basic Administration
+            </p>
+            <nav class="space-y-1">
+              <a href="#admin-overview" onclick="app.navigate('admin-overview')" id="nav-admin-overview" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="gauge" class="w-5 h-5"></i>
+                </div>
+                <span>Overview</span>
+              </a>
+              <a href="#admin-updates" onclick="app.navigate('admin-updates')" id="nav-admin-updates" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="arrow-up-circle" class="w-5 h-5"></i>
+                </div>
+                <span class="flex items-center justify-between flex-1">
+                  <span>Updates</span>
+                  <span id="nav-update-badge" class="hidden text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">NEW</span>
+                </span>
+              </a>
+              <a href="#admin-settings" onclick="app.navigate('admin-settings')" id="nav-admin-settings" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="sliders" class="w-5 h-5"></i>
+                </div>
+                <span>Settings</span>
+              </a>
+              <a href="#admin-addons" onclick="app.navigate('admin-addons')" id="nav-admin-addons" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="package-check" class="w-5 h-5 text-purple-400"></i>
+                </div>
+                <span class="flex items-center justify-between flex-1">
+                  <span>Addons</span>
+                  <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">v2.0.2</span>
+                </span>
+              </a>
+              <a href="#admin-api" onclick="app.navigate('admin-api')" id="nav-admin-api" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="key" class="w-5 h-5"></i>
+                </div>
+                <span>Application API</span>
+              </a>
+              <a href="#admin-sociallogin" onclick="app.navigate('admin-sociallogin')" id="nav-admin-sociallogin" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="share-2" class="w-5 h-5"></i>
+                </div>
+                <span>Social Login</span>
+              </a>
+            </nav>
+          </div>
+
+          <!-- Section 2: Management -->
+          <div class="space-y-1">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-1">
+              Management
+            </p>
+            <nav class="space-y-1">
+              <a href="#admin-servers" onclick="app.navigate('admin-servers')" id="nav-admin-servers" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="hard-drive" class="w-5 h-5"></i>
+                </div>
+                <span>Servers</span>
+              </a>
+              <a href="#admin-users" onclick="app.navigate('admin-users')" id="nav-admin-users" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="users" class="w-5 h-5"></i>
+                </div>
+                <span>Users</span>
+              </a>
+              <a href="#admin-databases" onclick="app.navigate('admin-databases')" id="nav-admin-databases" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="database" class="w-5 h-5"></i>
+                </div>
+                <span>Databases</span>
+              </a>
+              <a href="#admin-backups" onclick="app.navigate('admin-backups')" id="nav-admin-backups" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="archive" class="w-5 h-5"></i>
+                </div>
+                <span>Backups</span>
+              </a>
+              <a href="#admin-autobackups" onclick="app.navigate('admin-autobackups')" id="nav-admin-autobackups" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="clock" class="w-5 h-5"></i>
+                </div>
+                <span>Auto Backup</span>
+              </a>
+              <a href="#admin-network" onclick="app.navigate('admin-network')" id="nav-admin-network" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="radio" class="w-5 h-5"></i>
+                </div>
+                <span>Network</span>
+              </a>
+              <a href="#admin-nodes" onclick="app.navigate('admin-nodes')" id="nav-admin-nodes" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="network" class="w-5 h-5"></i>
+                </div>
+                <span>Nodes & Ports</span>
+              </a>
+              <a href="#admin-locations" onclick="app.navigate('admin-locations')" id="nav-admin-locations" class="nook-nav-item">
+                <div class="nook-icon-box">
+                  <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <span>Locations</span>
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Dynamic Content Container (Auto Responsive across Phone, Tablet, PC) -->
+    <main id="main-content" class="flex-1 min-h-0 h-full max-h-full overflow-y-auto overscroll-contain p-3.5 sm:p-6 lg:p-8 space-y-6 custom-scrollbar flex flex-col justify-between">
+      <!-- Nebula Announcement Alert Container -->
+      <div id="nebula-alert-banner" class="hidden"></div>
+
+      <!-- Dynamic Views injected via JS -->
+      <div id="view-container" class="flex-1"></div>
+
+      <!-- Permanent Non-Removable Global Footer Watermark -->
+      <footer id="mpanel-global-footer-watermark" class="w-full pt-8 pb-4 text-center select-none shrink-0 border-t border-white/5 mt-8">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-2 rounded-2xl bg-slate-950/80 border border-white/10 backdrop-blur-md shadow-xl text-xs text-slate-400">
+          <span class="text-slate-300 font-semibold flex items-center gap-1.5">
+            <i data-lucide="code-2" class="w-4 h-4 text-cyan-400"></i> Engineered by
+            <a href="javascript:void(0)" onclick="app.showDeveloperCardModal()" class="text-purple-300 hover:text-purple-200 font-bold hover:underline transition flex items-center gap-1.5">
+              <span id="footer-dev-status-dot" class="w-2 h-2 rounded-full bg-emerald-500 inline-block transition-colors duration-300"></span>
+              <span id="footer-dev-name">Nobita</span>
+              <span class="text-[10px] font-mono px-1 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">nobita.dev</span>
+            </a>
+          </span>
+          <span class="text-slate-600 hidden sm:inline">&bull;</span>
+          <a href="https://nobitahost.in/" target="_blank" class="inline-flex items-center justify-center text-sm hover:scale-125 transition" title="nobitahost.in">
+            🌐
+          </a>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Global Modals Container -->
+  <div id="modal-container"></div>
+
+  <!-- Application Javascript Modules -->
+  <script src="/js/sortable.min.js"></script>
+  <script src="/js/customServerSort.js?v=3.6.1"></script>
+  <script src="/js/auth.js?v=3.6.1"></script>
+  <script src="/js/app.js?v=3.6.1"></script>
+  <script src="/js/nebulaEditor.js?v=2.0.0"></script>
+  <script src="/js/discordLive.js?v=1.0.0"></script>
+  <script src="/js/settings.js?v=3.6.1"></script>
+  <script src="/js/console.js?v=3.6.1"></script>
+  <script src="/js/filemanager.js?v=3.6.1"></script>
+  <script src="/js/configEditor.js?v=3.6.1"></script>
+  <script src="/js/marketplace.js?v=3.6.1"></script>
+  <script src="/js/mctools.js?v=1.0.0"></script>
+  <script src="/js/autoTutorial.js?v=2.1.0"></script>
+  <script src="/js/knowledge.js?v=2.0.2"></script>
+  <script src="/js/versionChanger.js?v=3.6.1"></script>
+  <script src="/js/playerManager.js?v=3.6.1"></script>
+  <script src="/js/worldManager.js?v=3.6.1"></script>
+  <script src="/js/serverImporter.js?v=3.6.1"></script>
+  <script src="/js/serverProperties.js?v=3.6.1"></script>
+  <script src="/js/serverSplitter.js?v=3.6.1"></script>
+  <script src="/js/autoBackups.js?v=3.6.1"></script>
+  <script src="/js/updates.js?v=2.4.0"></script>
+  <script src="/js/admin.js?v=3.6.1"></script>
+  <script src="/js/adminAddons.js?v=3.6.1"></script>
+
+  <script>
+    // Initialize icons on DOM load
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
+

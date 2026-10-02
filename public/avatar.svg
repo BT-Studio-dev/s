@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <style>
+    /* Breathing animation for the avatar icon */
+    .avatar-group {
+      animation: breathe 3s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.04);
+      }
+    }
+
+    /* Hover interactivity for the entire SVG */
+    svg {
+      transition: transform 0.3s ease, filter 0.3s ease;
+      cursor: pointer;
+    }
+
+    svg:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 10px rgba(220, 38, 38, 0.7));
+    }
+  </style>
+
+  <!-- Background in Red -->
+  <rect width="128" height="128" rx="32" fill="#DC2626" />
+
+  <!-- Animated Group (Head & Shoulders) -->
+  <g class="avatar-group">
+    <!-- Head -->
+    <circle cx="64" cy="48" r="20" fill="#FFFFFF" />
+
+    <!-- Shoulders / Body -->
+    <path d="M 32 104 C 32 80, 44 76, 64 76 C 84 76, 96 80, 96 104 Z" fill="#FFFFFF" />
+  </g>
+</svg>
