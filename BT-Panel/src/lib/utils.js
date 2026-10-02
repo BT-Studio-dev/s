@@ -130,8 +130,19 @@ export async function compressImageFile(file, maxSize, quality = 0.85, type = "i
 // third-party cookies inside an embedded preview iframe (e.g. Safari) never
 // send it, so the token is also kept here and sent as a Bearer header.
 const TOKEN_KEY = "btpanel.session";
+
+// Held in memory as well as in localStorage. An embedded cross-site preview
+// can block *both* the session cookie and localStorage at once, which left
+// the panel with no way to authenticate at all: every call after a successful
+// sign-in came back 401 ("your session has expired") even though the login
+// itself worked. The in-memory copy lives as long as the document, which is
+// the whole session for the sign-in flow, since the panel swaps in without
+// navigating.
+let memoryToken = null;
+
 export function getStoredToken() {
   if (typeof window === "undefined") return null;
+  if (memoryToken) return memoryToken;
   try {
     return window.localStorage.getItem(TOKEN_KEY);
   } catch {
@@ -140,14 +151,16 @@ export function getStoredToken() {
 }
 export function storeToken(token) {
   if (typeof window === "undefined" || !token) return;
+  memoryToken = token;
   try {
     window.localStorage.setItem(TOKEN_KEY, token);
   } catch {
-    /* storage unavailable — cookie session still works */
+    /* storage blocked — the in-memory copy above carries the session */
   }
 }
 export function clearStoredToken() {
   if (typeof window === "undefined") return;
+  memoryToken = null;
   try {
     window.localStorage.removeItem(TOKEN_KEY);
   } catch {

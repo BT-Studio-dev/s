@@ -109,6 +109,32 @@ function readAccent() {
 function readLight() {
   return document.documentElement.dataset.themeMode === "light" ? 1 : 0;
 }
+/**
+ * Pure-CSS stand-ins used when WebGL is unavailable (older GPUs, blocked or
+ * software-disabled contexts, and sandboxed preview iframes). Each one
+ * approximates its shader's composition in the current accent colour, so the
+ * wallpaper picker still shows four distinguishable options instead of four
+ * empty cards.
+ */
+const FALLBACK_BG = {
+  waves:
+    "linear-gradient(170deg, rgb(var(--glass-tint)) 0%, transparent 55%), " +
+    "radial-gradient(130% 70% at 50% 105%, var(--accent) 0%, transparent 62%), " +
+    "radial-gradient(90% 55% at 15% 85%, var(--accent) 0%, transparent 70%)",
+  aurora:
+    "linear-gradient(185deg, rgb(var(--glass-tint)) 0%, transparent 60%), " +
+    "radial-gradient(75% 40% at 50% 42%, var(--accent) 0%, transparent 68%), " +
+    "radial-gradient(60% 28% at 25% 55%, var(--accent) 0%, transparent 72%)",
+  mesh:
+    "radial-gradient(32% 32% at 72% 30%, var(--accent) 0%, transparent 70%), " +
+    "radial-gradient(28% 28% at 22% 68%, var(--accent) 0%, transparent 72%), " +
+    "radial-gradient(24% 24% at 62% 78%, var(--accent) 0%, transparent 74%)",
+  nebula:
+    "radial-gradient(85% 60% at 32% 38%, var(--accent) 0%, transparent 66%), " +
+    "radial-gradient(70% 50% at 72% 68%, #5258f2 0%, transparent 70%), " +
+    "linear-gradient(200deg, rgb(var(--glass-tint)) 0%, transparent 70%)",
+};
+
 export function ShaderCanvas({ variant, className, maxDpr = 1.5 }) {
   const ref = useRef(null);
   const [failed, setFailed] = useState(false);
@@ -200,7 +226,18 @@ export function ShaderCanvas({ variant, className, maxDpr = 1.5 }) {
       gl.deleteShader(fs);
     };
   }, [variant, maxDpr]);
-  if (failed) return null;
+  if (failed)
+    return (
+      <div
+        className={className}
+        aria-hidden="true"
+        style={{
+          background: FALLBACK_BG[variant] ?? FALLBACK_BG.waves,
+          backgroundColor: "rgb(var(--glass-tint))",
+          opacity: 0.85,
+        }}
+      />
+    );
   return <canvas ref={ref} className={className} aria-hidden="true" />;
 }
 export function WallpaperLayer({ theme }) {
