@@ -130,7 +130,7 @@ export const panelSettings = mysqlTable("panel_settings", {
     length: 16,
   })
     .notNull()
-    .default("#3b82f6"),
+    .default("#d00000"),
   glassTint: varchar("glass_tint", {
     length: 16,
   })

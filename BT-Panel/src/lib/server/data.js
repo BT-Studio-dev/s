@@ -68,7 +68,7 @@ const INITIAL_SCHEMA = [
     bg_opacity INT NOT NULL DEFAULT 100,
     wallpaper_fit VARCHAR(16) NOT NULL DEFAULT 'cover',
     wallpaper_zoom INT NOT NULL DEFAULT 100,
-    accent_color VARCHAR(16) NOT NULL DEFAULT '#3b82f6',
+    accent_color VARCHAR(16) NOT NULL DEFAULT '#d00000',
     glass_tint VARCHAR(16) NOT NULL DEFAULT '#0c1424',
     nav_text VARCHAR(16) NOT NULL DEFAULT '#9da3b4',
     nav_text_active VARCHAR(16) NOT NULL DEFAULT '#e7e9f0',

@@ -23,7 +23,7 @@ export const DEFAULT_THEME = {
   bgOpacity: 100,
   wallpaperFit: "cover",
   wallpaperZoom: 100,
-  accentColor: "#3b82f6",
+  accentColor: "#d00000",
   glassTint: "#0c1424",
   navText: "#9da3b4",
   navTextActive: "#e7e9f0",
