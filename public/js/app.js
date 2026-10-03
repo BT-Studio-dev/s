@@ -1,4 +1,4 @@
-// Mpanel Application Core & Router
+// BT Panel Application Core & Router
 class App {
   constructor() {
     this.token = localStorage.getItem('mpanel_token') || null;
@@ -1161,7 +1161,7 @@ class App {
       if (logoEl && (!s.panel_logo || s.panel_logo === '/assets/mpanel-logo.svg' || s.panel_logo === '/arix/Arix.png' || s.panel_logo === '/assets/liquidx-logo.svg' || s.panel_logo === '/images/pterox-header-logo.webp')) {
         logoEl.src = '/assets/lucent-logo.svg';
       }
-      if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'Mpanel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
+      if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'BT Panel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
         subNameEl.innerText = 'LucentUI Minimalist Engine';
       }
     } else if (activeTheme === 'dezerx') {
@@ -1169,7 +1169,7 @@ class App {
       if (logoEl && (!s.panel_logo || s.panel_logo === '/assets/mpanel-logo.svg' || s.panel_logo === '/arix/Arix.png' || s.panel_logo === '/assets/liquidx-logo.svg' || s.panel_logo === '/images/pterox-header-logo.webp')) {
         logoEl.src = '/images/meta/Logo.png';
       }
-      if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'Mpanel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
+      if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'BT Panel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
         subNameEl.innerText = 'DezerX Vulcan Cloud';
       }
     } else if (activeTheme === 'nebula') {
@@ -1177,7 +1177,7 @@ class App {
       if (logoEl && (!s.panel_logo || s.panel_logo === '/assets/mpanel-logo.svg' || s.panel_logo === '/arix/Arix.png' || s.panel_logo === '/assets/liquidx-logo.svg' || s.panel_logo === '/images/pterox-header-logo.webp')) {
         logoEl.src = '/assets/nebula-logo.svg';
       }
-      if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'Mpanel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
+      if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'BT Panel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
         subNameEl.innerText = 'Nebula Theme v2.0';
       }
       if (window.nebulaEditor) {
@@ -1216,7 +1216,7 @@ class App {
       if (logoEl && (!s.panel_logo || s.panel_logo === '/assets/mpanel-logo.svg' || s.panel_logo === '/arix/Arix.png' || s.panel_logo === '/images/pterox-header-logo.webp')) {
         logoEl.src = '/assets/liquidx-logo.svg';
       }
-      if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'Mpanel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
+      if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'BT Panel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
         subNameEl.innerText = 'LiquidX Theme v1.0';
       }
       if (s.liquidx_primary_color) {
@@ -1227,7 +1227,7 @@ class App {
       if (logoEl && (!s.panel_logo || s.panel_logo === '/assets/mpanel-logo.svg' || s.panel_logo === '/assets/liquidx-logo.svg' || s.panel_logo === '/images/pterox-header-logo.webp')) {
         logoEl.src = '/arix/Arix.png';
       }
-      if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'Mpanel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
+      if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'BT Panel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
         subNameEl.innerText = 'Arix Theme v2.1.3';
       }
       if (s.arix_primary_color) {
@@ -1239,7 +1239,7 @@ class App {
         logoEl.src = '/assets/logo.png';
       }
       if (subNameEl && (subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('PteroX'))) {
-        subNameEl.innerText = 'Mpanel Server Engine';
+        subNameEl.innerText = 'BT Panel Server Engine';
       }
     }
 
@@ -2519,7 +2519,7 @@ class App {
                       <!-- Email -->
                       <td class="px-4 py-3 font-mono">
                         <div class="flex items-center gap-1.5">
-                          <span class="text-slate-300 text-xs truncate max-w-xs">${this.escapeHtml(u.email || 'user@mpanel.local')}</span>
+                          <span class="text-slate-300 text-xs truncate max-w-xs">${this.escapeHtml(u.email || 'user@btpanel.local')}</span>
                           <button onclick="navigator.clipboard.writeText('${this.escapeHtml(u.email || '')}'); app.toast('Copied email: ${this.escapeHtml(u.email || '')}', 'info');" class="p-1 rounded hover:bg-white/10 text-slate-500 hover:text-slate-300 transition" title="Copy Email">
                             <i data-lucide="copy" class="w-3 h-3"></i>
                           </button>
