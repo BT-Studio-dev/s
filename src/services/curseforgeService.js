@@ -31,7 +31,7 @@ class CurseForgeService {
       headers: {
         'x-api-key': this.apiKey,
         'Accept': 'application/json',
-        'User-Agent': 'Mpanel-Game-Server-Panel/1.0.0'
+        'User-Agent': 'BT-Panel-Game-Server-Panel/1.0.0'
       }
     });
   }
