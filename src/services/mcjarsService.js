@@ -204,7 +204,7 @@ class McJarsService {
       responseType: 'stream',
       timeout: 60000,
       headers: {
-        'User-Agent': 'Mpanel-Server-Manager/1.0'
+        'User-Agent': 'BT-Panel-Server-Manager/1.0'
       }
     });
 
