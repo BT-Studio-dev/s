@@ -41,7 +41,7 @@ Thumbs.db
 .vscode/
 
 # ---------------------------------------------------------------------------
-# Runtime data (legacy Mpanel engine + uploads)
+# Runtime data (legacy BT Panel engine + uploads)
 # ---------------------------------------------------------------------------
 /data/*
 !/data/.gitkeep
