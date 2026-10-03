@@ -20,7 +20,7 @@ function createDaemonServer() {
 
     res.json({
       status: 'healthy',
-      daemon: 'Mpanel Daemon Engine v1.0',
+      daemon: 'BT Panel Daemon Engine v1.0',
       port: config.PORT_API,
       platform: os.platform(),
       arch: os.arch(),
