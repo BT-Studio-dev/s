@@ -420,7 +420,7 @@ router.get('/:id/wings-stats', authenticate, requireAdmin, async (req, res) => {
     } catch (e) {
       topProcesses = [
         { user: 'root', pid: '1', cpu: 0.1, mem: 0.3, command: 'systemd / init' },
-        { user: 'panel', pid: String(process.pid), cpu: 0.8, mem: 1.2, command: 'node src/index.js (Mpanel Core)' }
+        { user: 'panel', pid: String(process.pid), cpu: 0.8, mem: 1.2, command: 'node src/index.js (BT Panel Core)' }
       ];
     }
 
