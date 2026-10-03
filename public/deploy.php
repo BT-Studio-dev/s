@@ -1,11 +1,11 @@
 <?php
 /**
- * Mpanel - Standalone Full-Page Server Deployment Application
+ * BT Panel - Standalone Full-Page Server Deployment Application
  * File: deploy.php
  * 
  * Provides a dedicated, full-page interface for deploying game servers,
  * Node.js applications, Python bots, PHP projects, and LumenVM VPS instances.
- * Connects directly to Mpanel's REST API.
+ * Connects directly to BT Panel's REST API.
  */
 
 session_start();
@@ -26,7 +26,7 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Helper: Make cURL Request to Mpanel API
+// Helper: Make cURL Request to BT Panel API
 function callMpanelApi($endpoint, $method = 'GET', $data = null, $token = null, $baseUrl = null) {
     if (!$baseUrl) {
         $baseUrl = $_SESSION['mpanel_url'] ?? 'http://localhost:3003';
@@ -85,9 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         // Test connection
         $test = callMpanelApi('/api/admin/settings/public', 'GET', null, null, $_SESSION['mpanel_url']);
         if (isset($test['success']) && $test['success']) {
-            $notice = 'Successfully connected to Mpanel: ' . htmlspecialchars($test['settings']['panel_name'] ?? 'Mpanel');
+            $notice = 'Successfully connected to BT Panel: ' . htmlspecialchars($test['settings']['panel_name'] ?? 'BT Panel');
         } else {
-            $error = 'Connection test failed: ' . htmlspecialchars($test['error'] ?? 'Could not connect to Mpanel at ' . $url);
+            $error = 'Connection test failed: ' . htmlspecialchars($test['error'] ?? 'Could not connect to BT Panel at ' . $url);
         }
     } elseif ($_POST['action'] === 'login') {
         $username = trim($_POST['username'] ?? '');
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     } elseif ($_POST['action'] === 'logout') {
         unset($_SESSION['mpanel_token']);
         unset($_SESSION['mpanel_user']);
-        $notice = 'Disconnected from Mpanel session.';
+        $notice = 'Disconnected from BT Panel session.';
     } elseif ($_POST['action'] === 'deploy_server') {
         // --- Process Server Deployment ---
         $authToken = $_SESSION['mpanel_token'] ?? null;
@@ -236,7 +236,7 @@ if ($authToken) {
     }
 }
 
-$panelName = $publicSettings['panel_name'] ?? 'Mpanel';
+$panelName = $publicSettings['panel_name'] ?? 'BT Panel';
 ?>
 <!DOCTYPE html>
 <html lang="en" class="dark">
@@ -419,7 +419,7 @@ $panelName = $publicSettings['panel_name'] ?? 'Mpanel';
 
         <div class="flex items-center gap-3 pt-2">
           <a href="<?= htmlspecialchars($createdServer['console_url']) ?>" target="_blank" class="btn-cyber px-6 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg">
-            <i data-lucide="terminal" class="w-4 h-4"></i> Open Server Console in Mpanel
+            <i data-lucide="terminal" class="w-4 h-4"></i> Open Server Console in BT Panel
           </a>
           <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-4 py-2.5 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 transition">
             + Deploy Another Server
@@ -778,7 +778,7 @@ $panelName = $publicSettings['panel_name'] ?? 'Mpanel';
     <div class="glass-card w-full max-w-md p-6 sm:p-7 rounded-3xl border border-cyan-500/30 shadow-2xl space-y-5">
       <div class="flex items-center justify-between border-b border-white/10 pb-3">
         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-          <i data-lucide="shield-check" class="w-4 h-4 text-cyan-400"></i> Connect to Mpanel Engine
+          <i data-lucide="shield-check" class="w-4 h-4 text-cyan-400"></i> Connect to BT Panel Engine
         </h3>
         <?php if ($authToken): ?>
           <button onclick="document.getElementById('connection-modal').classList.add('hidden')" class="text-slate-400 hover:text-white">
@@ -793,7 +793,7 @@ $panelName = $publicSettings['panel_name'] ?? 'Mpanel';
         <input type="hidden" name="action" value="login">
         
         <div>
-          <label class="block text-[11px] font-semibold text-slate-300 mb-1">Mpanel Base URL</label>
+          <label class="block text-[11px] font-semibold text-slate-300 mb-1">BT Panel Base URL</label>
           <input type="url" name="mpanel_url" value="<?= htmlspecialchars($_SESSION['mpanel_url']) ?>" required placeholder="http://localhost:3003" class="w-full glass-input px-3 py-2 rounded-xl text-xs font-mono">
         </div>
 
@@ -808,7 +808,7 @@ $panelName = $publicSettings['panel_name'] ?? 'Mpanel';
         </div>
 
         <button type="submit" class="btn-cyber w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg">
-          <i data-lucide="log-in" class="w-3.5 h-3.5"></i> Sign In to Mpanel
+          <i data-lucide="log-in" class="w-3.5 h-3.5"></i> Sign In to BT Panel
         </button>
       </form>
 
@@ -824,7 +824,7 @@ $panelName = $publicSettings['panel_name'] ?? 'Mpanel';
         <input type="hidden" name="mpanel_url" value="<?= htmlspecialchars($_SESSION['mpanel_url']) ?>">
         
         <div>
-          <label class="block text-[11px] font-semibold text-slate-300 mb-1">Mpanel API Key (Token)</label>
+          <label class="block text-[11px] font-semibold text-slate-300 mb-1">BT Panel API Key (Token)</label>
           <input type="password" name="mpanel_token" placeholder="mpk_xxxxxxxx or JWT Token" class="w-full glass-input px-3 py-2 rounded-xl text-xs font-mono">
         </div>
 
