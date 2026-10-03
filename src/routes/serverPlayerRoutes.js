@@ -51,7 +51,7 @@ router.get('/', authenticate, requireServerAccess(), async (req, res) => {
           name: server?.jar_type ? `${server.jar_type} ${server.jar_version || ''}` : 'Minecraft'
         },
         motd: {
-          formatted: server?.description || 'A Minecraft Server Powered by Mpanel'
+          formatted: server?.description || 'A Minecraft Server Powered by BT Panel'
         },
         numplayers: onlineList.length,
         maxplayers: rawData.playerCounts?.max || 20
