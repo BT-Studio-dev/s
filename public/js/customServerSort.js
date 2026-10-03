@@ -1,5 +1,5 @@
 /**
- * Custom Server Sort Extension for Mpanel
+ * Custom Server Sort Extension for BT Panel
  * Ported from customserversort.blueprint (v1.0.3 by kiip)
  * Enables smooth drag-and-drop server reordering and multi-criteria sorting.
  */
