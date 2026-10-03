@@ -11,17 +11,37 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "setup": "node bin/setup.js",
+    "createuser": "node bin/createuser.js",
+    "migrate:legacy": "node bin/migrate.js",
+    "build:legacy": "node bin/build.js",
+    "legacy:start": "node src/index.js"
   },
   "dependencies": {
+    "archiver": "^8.0.0",
+    "axios": "^1.20.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dockerode": "^5.0.1",
     "dotenv": "17.3.1",
     "drizzle-orm": "0.45.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^1.47.0",
+    "multer": "^2.4.0",
     "mysql2": "^3.15.1",
     "next": "16.2.6",
+    "node-cron": "^4.6.0",
+    "qrcode": "^1.5.4",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "sonner": "^2.0.8"
+    "sonner": "^2.0.8",
+    "speakeasy": "^2.0.0",
+    "ssh2": "^1.17.0",
+    "unzipper": "^0.12.5",
+    "uuid": "^14.0.2",
+    "ws": "^8.22.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -43,10 +63,13 @@
     "typescript": "5.9.3"
   },
   "allowScripts": {
+    "cpu-features@0.0.10": true,
     "esbuild@0.18.20": true,
     "esbuild@0.25.12": true,
     "esbuild@0.28.2": true,
+    "protobufjs@7.6.6": true,
     "sharp@0.34.5": true,
+    "ssh2@1.17.0": true,
     "unrs-resolver@1.12.2": true
   }
 }
