@@ -42,7 +42,7 @@ const PROVIDER_CONFIGS = {
           const emailsRes = await axios.get('https://api.github.com/user/emails', {
             headers: {
               Authorization: `Bearer ${token}`,
-              'User-Agent': 'Mpanel-OAuth'
+              'User-Agent': 'BT-Panel-OAuth'
             }
           });
           const primary = emailsRes.data.find(e => e.primary) || emailsRes.data[0];
@@ -235,7 +235,7 @@ class SocialLoginService {
         {
           headers: {
             Accept: 'application/json',
-            'User-Agent': 'Mpanel-OAuth'
+            'User-Agent': 'BT-Panel-OAuth'
           }
         }
       );
@@ -256,7 +256,7 @@ class SocialLoginService {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             Authorization: `Basic ${basicAuth}`,
-            'User-Agent': 'Mpanel-OAuth'
+            'User-Agent': 'BT-Panel-OAuth'
           }
         }
       );
@@ -288,7 +288,7 @@ class SocialLoginService {
     const profileRes = await axios.get(provConfig.profileUrl, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        'User-Agent': 'Mpanel-OAuth',
+        'User-Agent': 'BT-Panel-OAuth',
         ...(shortName === 'twitch' ? { 'Client-Id': providerRecord.client_id } : {})
       }
     });
