@@ -1,5 +1,5 @@
 /**
- * Mpanel - Universal Config Editor Engine
+ * BT Panel - Universal Config Editor Engine
  * Ported from configeditor.blueprint (UndercoverNL / nobita329)
  * Supports visual and raw editing of server.properties, YAML, JSON, CFG, and custom config files.
  */
@@ -554,7 +554,7 @@ class UniversalConfigEditor {
   }
 
   createEmptyFile(filePath) {
-    this.rawContent = `# ${filePath} created via Mpanel Config Editor\n`;
+    this.rawContent = `# ${filePath} created via BT Panel Config Editor\n`;
     if (this.currentFileType === 'json') this.rawContent = '{\n}\n';
     this.parsedItems = this.parseProperties(this.rawContent);
     this.renderActiveMode();
