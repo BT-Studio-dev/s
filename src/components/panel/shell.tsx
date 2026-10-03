@@ -203,7 +203,7 @@ function Sidebar() {
       >
         <div className={cn("mb-4 flex items-center gap-2", collapsed ? "flex-col" : "justify-between")}>
           <div className="flex min-w-0 items-center gap-2.5">
-            <BrandMark className="size-9 shrink-0 drop-shadow-[0_0_14px_var(--accent-glow)]" src={settings.panelLogo || undefined} />
+            <BrandMark className="size-9 shrink-0 drop-shadow-[0_0_14px_var(--accent-glow)]" src={settings.panelLogo || "/bt-logo.svg"} />
             {!collapsed ? (
               <div className="min-w-0">
                 <div className="truncate text-[15px] font-extrabold tracking-tight">{settings.panelName}</div>
