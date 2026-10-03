@@ -5,7 +5,7 @@ const config = require('../config/config');
 const fileManagerService = require('./fileManagerService');
 
 const MODRINTH_API = 'https://api.modrinth.com/v2';
-const USER_AGENT = 'Mpanel-Game-Server-Panel/1.0.0 (contact@mpanel.local)';
+const USER_AGENT = 'BT-Panel-Game-Server-Panel/1.0.0 (contact@btpanel.local)';
 
 const apiClient = axios.create({
   baseURL: MODRINTH_API,
