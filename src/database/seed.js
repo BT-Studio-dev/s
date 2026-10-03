@@ -8,9 +8,9 @@ async function seedDatabase() {
 
   // Default Settings
   const defaultSettings = [
-    { key: 'panel_name', value: 'Mpanel', description: 'Application display name' },
+    { key: 'panel_name', value: 'BT Panel', description: 'Application display name' },
     { key: 'panel_logo', value: '', description: 'Panel Logo image URL or uploaded file path' },
-    { key: 'favicon_name', value: 'Mpanel', description: 'Favicon tab title' },
+    { key: 'favicon_name', value: 'BT Panel', description: 'Favicon tab title' },
     { key: 'favicon_logo', value: '', description: 'Favicon icon URL or uploaded path' },
     { key: 'panel_bg', value: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=3840&q=90', description: 'Panel Background Image or Video URL' },
     { key: 'panel_bg_type', value: 'image', description: 'image or video' },
@@ -85,7 +85,7 @@ async function seedDatabase() {
     const adminUuid = uuidv4();
     await query.run(
       'INSERT INTO users (uuid, username, email, password_hash, role) VALUES (?, ?, ?, ?, ?)',
-      [adminUuid, 'admin', 'admin@mpanel.local', passwordHash, 'admin']
+      [adminUuid, 'admin', 'admin@btpanel.local', passwordHash, 'admin']
     );
     console.log('👑 Default Admin User created: username: "admin", password: "admin"');
   }
