@@ -4,7 +4,7 @@ const path = require('path');
 const fileManagerService = require('./fileManagerService');
 
 const SPIGET_API = 'https://api.spiget.org/v2';
-const USER_AGENT = 'Mpanel-Game-Server-Panel/2.1.0 (https://github.com/nobita329/Mpanel)';
+const USER_AGENT = 'BT-Panel-Game-Server-Panel/2.1.0 (https://github.com/nobita329/Mpanel)';
 
 const client = axios.create({
   baseURL: SPIGET_API,
