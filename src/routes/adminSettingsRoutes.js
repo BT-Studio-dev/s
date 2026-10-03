@@ -151,8 +151,8 @@ router.post('/reset', authenticate, requireAdmin, async (req, res) => {
       transparency_bar: String(dt.transparency ?? 18),
       blur_bar: String(dt.blur ?? 16),
       theme_mode: 'dark',
-      panel_name: config.DEFAULT_PANEL_NAME || 'Mpanel',
-      favicon_name: config.DEFAULT_PANEL_NAME || 'Mpanel',
+      panel_name: config.DEFAULT_PANEL_NAME || 'BT Panel',
+      favicon_name: config.DEFAULT_PANEL_NAME || 'BT Panel',
       panel_logo: dt.logo || '/assets/logo.png',
       favicon_logo: dt.favicon || '/images/meta/Logo.png'
     };
