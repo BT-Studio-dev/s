@@ -8,7 +8,7 @@ const { logActivity } = require('./activityService');
 class UpdateService {
   constructor() {
     this.repoOwner = 'nobita329';
-    this.repoName = 'Mpanel';
+    this.repoName = 'BT Panel';
     this.githubApiUrl = `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/releases`;
     this.githubReleasesUrl = `https://github.com/${this.repoOwner}/${this.repoName}/releases`;
     this.rootPath = path.resolve(__dirname, '../../');
@@ -87,7 +87,7 @@ class UpdateService {
     try {
       const res = await axios.get(this.githubApiUrl, {
         headers: {
-          'User-Agent': 'Mpanel-Update-Detector/2.4.0',
+          'User-Agent': 'BT-Panel-Update-Detector/2.4.0',
           'Accept': 'application/vnd.github.v3+json'
         },
         timeout: 8000
@@ -163,7 +163,7 @@ class UpdateService {
       return payload;
 
     } catch (err) {
-      console.warn('Could not fetch GitHub releases for Mpanel:', err.message);
+      console.warn('Could not fetch GitHub releases for BT Panel:', err.message);
       // Return fallback cached or current state
       const fallback = {
         success: false,
@@ -279,7 +279,7 @@ class UpdateService {
     this.broadcast({ type: 'start', mode: options.mode || 'full' });
 
     this.log(`\x1b[1;35m╔══════════════════════════════════════════════════════════════╗\x1b[0m`);
-    this.log(`\x1b[1;35m║         🚀 MPANEL AUTOMATED SYSTEM UPDATE PIPELINE           ║\x1b[0m`);
+    this.log(`\x1b[1;35m║         🚀 BT PANEL AUTOMATED SYSTEM UPDATE PIPELINE           ║\x1b[0m`);
     this.log(`\x1b[1;35m╚══════════════════════════════════════════════════════════════╝\x1b[0m`);
     this.log(`\x1b[90mStarted at: ${new Date().toLocaleString()} | Root: ${this.rootPath}\x1b[0m\n`);
 
@@ -326,7 +326,7 @@ class UpdateService {
       );
 
       // Step 5: PM2 Process Reload
-      this.setStep(5, 6, 'Restarting Mpanel Service');
+      this.setStep(5, 6, 'Restarting BT Panel Service');
       this.log(`\x1b[36m▶ [Step 5/6] Reloading PM2 Cluster & Processes...\x1b[0m`);
       try {
         await this.runCommandAsync(
@@ -341,7 +341,7 @@ class UpdateService {
       // Step 6: Post-Update Verification
       this.setStep(6, 6, 'Finalizing & Verifying Health');
       this.log(`\x1b[36m▶ [Step 6/6] Finalizing System Health Check...\x1b[0m`);
-      this.log(`\x1b[1;32m🎉 Mpanel has been successfully updated to the latest release!\x1b[0m`);
+      this.log(`\x1b[1;32m🎉 BT Panel has been successfully updated to the latest release!\x1b[0m`);
       this.log(`\x1b[32m✔ Web UI, API Daemon, and SFTP Engine are operational.\x1b[0m\n`);
 
       this.cache.data = null; // Clear cache so new version is detected immediately
