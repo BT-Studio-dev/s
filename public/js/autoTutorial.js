@@ -1,4 +1,4 @@
-// Mpanel Auto Tutorial & Interactive Tour Engine
+// BT Panel Auto Tutorial & Interactive Tour Engine
 // Provides automated product walkthroughs, element spotlighting, interactive simulators, and guided onboarding tours.
 
 class AutoTutorialManager {
@@ -15,12 +15,12 @@ class AutoTutorialManager {
     this.tours = {
       'panel-tour': {
         id: 'panel-tour',
-        title: 'Mpanel Complete Platform Tour',
+        title: 'BT Panel Complete Platform Tour',
         badge: 'Interactive Walkthrough',
         steps: [
           {
             target: '#sidebar-portal-section',
-            title: 'Welcome to Mpanel',
+            title: 'Welcome to BT Panel',
             content: 'Your high-performance game and application management dashboard. Here in the sidebar you can swiftly navigate between your servers, marketplace, tutorials, and account credentials.',
             route: 'user-overview',
             placement: 'right'
