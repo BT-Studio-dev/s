@@ -20,7 +20,7 @@ async function authenticate(req, res, next) {
       return res.status(401).json({ success: false, error: 'Authentication token missing or invalid.' });
     }
 
-    // Check if it's an Mpanel API Key (mpk_...)
+    // Check if it's an BT Panel API Key (mpk_...)
     if (token.startsWith('mpk_')) {
       const apiKey = await query.get('SELECT * FROM api_keys WHERE key_token = ?', [token]);
       if (!apiKey) {
