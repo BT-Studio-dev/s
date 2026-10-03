@@ -1,4 +1,4 @@
-// Mpanel Interactive Auto Tutorials Module
+// BT Panel Interactive Auto Tutorials Module
 class TutorialsManager {
   constructor() {
     this.activeCategory = 'all';
@@ -9,12 +9,12 @@ class TutorialsManager {
         category: 'getting-started',
         badge: 'Auto Guided Tour',
         badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-        title: 'Complete Mpanel Dashboard & Navigation Auto-Tour',
+        title: 'Complete BT Panel Dashboard & Navigation Auto-Tour',
         duration: '2 min auto-tour',
         interactiveAction: 'tour:panel-tour',
         summary: 'Take an automated guided walkthrough of server cards, live telemetry meters, marketplace addons, and custom themes.',
         content: `
-          <h3>Mpanel Complete Overview</h3>
+          <h3>BT Panel Complete Overview</h3>
           <p>This automated walkthrough spotlights key features of your panel including real-time container management, responsive screen layout controls, and fast server switching.</p>
           
           <div class="my-4 p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-between">
@@ -36,18 +36,18 @@ class TutorialsManager {
         title: 'Connecting to your Server via SFTP & File Uploads',
         duration: '3 min interactive',
         interactiveAction: 'sim:sftp',
-        summary: 'Learn how to connect FileZilla or WinSCP directly to your server using Mpanel embedded SFTP port 3004 with one-click URI copy.',
+        summary: 'Learn how to connect FileZilla or WinSCP directly to your server using BT Panel embedded SFTP port 3004 with one-click URI copy.',
         content: `
           <h3>Overview</h3>
-          <p>Mpanel features a high-performance embedded SFTP engine running on port <strong>3004</strong>. You can connect using any standard SFTP client like <strong>FileZilla</strong>, <strong>WinSCP</strong>, or <strong>Cyberduck</strong>.</p>
+          <p>BT Panel features a high-performance embedded SFTP engine running on port <strong>3004</strong>. You can connect using any standard SFTP client like <strong>FileZilla</strong>, <strong>WinSCP</strong>, or <strong>Cyberduck</strong>.</p>
           
           <div class="p-3 my-3 rounded-xl bg-black/40 border border-white/10 font-mono text-xs space-y-1">
             <div class="text-cyan-400"># SFTP Connection Details</div>
             <div><strong>Host / Server:</strong> <span class="text-slate-300">your-server-ip or panel domain</span></div>
             <div><strong>Port:</strong> <span class="text-amber-400">3004</span> (Default embedded SFTP port)</div>
             <div><strong>Protocol:</strong> <span class="text-slate-300">SFTP - SSH File Transfer Protocol</span></div>
-            <div><strong>Username:</strong> <span class="text-slate-300">Your Mpanel username</span></div>
-            <div><strong>Password:</strong> <span class="text-slate-300">Your Mpanel account password</span></div>
+            <div><strong>Username:</strong> <span class="text-slate-300">Your BT Panel username</span></div>
+            <div><strong>Password:</strong> <span class="text-slate-300">Your BT Panel account password</span></div>
           </div>
 
           <h4>Connecting with FileZilla</h4>
@@ -55,7 +55,7 @@ class TutorialsManager {
             <li>Open FileZilla and navigate to <strong>File &rarr; Site Manager</strong>.</li>
             <li>Click <strong>New Site</strong> and select protocol <strong>SFTP - SSH File Transfer Protocol</strong>.</li>
             <li>In <strong>Host</strong>, enter your server IP or domain. In <strong>Port</strong>, enter <code>3004</code>.</li>
-            <li>Set <strong>Logon Type</strong> to <code>Normal</code>, enter your Mpanel username and password.</li>
+            <li>Set <strong>Logon Type</strong> to <code>Normal</code>, enter your BT Panel username and password.</li>
             <li>Click <strong>Connect</strong> and accept the host key when prompted.</li>
           </ol>
 
@@ -75,7 +75,7 @@ class TutorialsManager {
         summary: 'How to provision dedicated database instances, connect LuckPerms/CoreProtect, and allow remote connections on port 27017.',
         content: `
           <h3>Connecting Server Plugins to MariaDB</h3>
-          <p>Mpanel automatically creates dedicated database credentials for each server database created under <strong>Databases</strong>.</p>
+          <p>BT Panel automatically creates dedicated database credentials for each server database created under <strong>Databases</strong>.</p>
 
           <div class="p-3 my-3 rounded-xl bg-black/40 border border-white/10 font-mono text-xs space-y-1">
             <div><strong>Database Host:</strong> <span class="text-cyan-300">127.0.0.1 (or node public IP)</span></div>
@@ -145,7 +145,7 @@ maximum-pool-size: 10
         summary: 'Protect your server data with automatic scheduled archives, locked restore points, and one-click restores.',
         content: `
           <h3>Automated Protection</h3>
-          <p>Mpanel allows creating compressed snapshots of your server filesystem with one click.</p>
+          <p>BT Panel allows creating compressed snapshots of your server filesystem with one click.</p>
 
           <h4>Key Capabilities</h4>
           <ul class="list-disc list-inside space-y-2 text-slate-300">
@@ -168,7 +168,7 @@ maximum-pool-size: 10
           <h3>Installing Plugins</h3>
           <ol class="list-decimal list-inside space-y-2 text-slate-300">
             <li>Download your chosen plugin (e.g. EssentialsX, WorldEdit, LuckPerms) compatible with your server version.</li>
-            <li>Open the <strong>Files</strong> manager in Mpanel or connect via <strong>SFTP</strong>.</li>
+            <li>Open the <strong>Files</strong> manager in BT Panel or connect via <strong>SFTP</strong>.</li>
             <li>Navigate to the <code>/plugins</code> directory.</li>
             <li>Drag and drop the plugin <code>.jar</code> file to upload it.</li>
             <li>Restart your server from the <strong>Console</strong> tab to initialize the plugin.</li>
@@ -401,7 +401,7 @@ data:
               <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
               <span>Discord Support</span>
             </a>
-            <a href="mailto:support@mpanel.local" class="px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 border border-white/10 text-white transition flex items-center gap-2">
+            <a href="mailto:support@btpanel.local" class="px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 border border-white/10 text-white transition flex items-center gap-2">
               <i data-lucide="mail" class="w-3.5 h-3.5"></i>
               <span>Email Us</span>
             </a>
