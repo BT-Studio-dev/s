@@ -10,7 +10,7 @@ async function askQuestion(rl, queryText) {
 
 async function main() {
   console.log('\n======================================');
-  console.log('       🛠️  Mpanel User Creator        ');
+  console.log('       🛠️  BT Panel User Creator        ');
   console.log('======================================\n');
 
   await initDatabase();
