@@ -1,7 +1,7 @@
 /**
  * McTools - Minecraft Server Utilities Suite
  * Ported from Blueprint Extension: mctools.blueprint (nobita329/Nobita-Cloud)
- * Author: towsifkafi | Maintained by nobita.dev for Mpanel
+ * Author: towsifkafi | Maintained by nobita.dev for BT Panel
  */
 class McToolsController {
   constructor() {
@@ -930,7 +930,7 @@ class McToolsController {
             <ul class="text-xs text-slate-300 space-y-1.5">
               <li><strong>Extension Name:</strong> McTools</li>
               <li><strong>Author:</strong> towsifkafi</li>
-              <li><strong>Mpanel Integration:</strong> nobita.dev</li>
+              <li><strong>BT Panel Integration:</strong> nobita.dev</li>
               <li><strong>File:</strong> <code>mctools.blueprint</code> (352 KB)</li>
               <li><strong>Framework:</strong> Blueprint Extension Engine</li>
             </ul>
