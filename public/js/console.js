@@ -1041,7 +1041,7 @@ class ServerConsole {
 
     this.ws.onopen = () => {
       if (this.term) {
-        this.term.writeln('\x1b[32m[Mpanel]\x1b[0m Connected to server live stream.');
+        this.term.writeln('\x1b[32m[BT Panel]\x1b[0m Connected to server live stream.');
       }
     };
 
@@ -1070,7 +1070,7 @@ class ServerConsole {
 
     this.ws.onclose = () => {
       if (this.term) {
-        this.term.writeln('\r\n\x1b[33m[Mpanel]\x1b[0m Disconnected from server stream.');
+        this.term.writeln('\r\n\x1b[33m[BT Panel]\x1b[0m Disconnected from server stream.');
       }
     };
   }
