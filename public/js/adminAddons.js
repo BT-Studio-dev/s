@@ -1,6 +1,6 @@
 // Arix Addon Pack v2.0.2 - Admin Addons Management Controller
 
-// Helper for API requests integrated with Mpanel app.api
+// Helper for API requests integrated with BT Panel app.api
 async function apiRequest(endpoint, method = 'GET', body = null) {
   const appObj = (typeof window !== 'undefined' && window.app) ? window.app : null;
   if (appObj && typeof appObj.api === 'function') {
