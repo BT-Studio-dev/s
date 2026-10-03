@@ -1167,7 +1167,7 @@ class App {
     } else if (activeTheme === 'dezerx') {
       document.documentElement.classList.add('theme-dezerx');
       if (logoEl && (!s.panel_logo || s.panel_logo === '/assets/mpanel-logo.svg' || s.panel_logo === '/arix/Arix.png' || s.panel_logo === '/assets/liquidx-logo.svg' || s.panel_logo === '/images/pterox-header-logo.webp')) {
-        logoEl.src = '/images/meta/Logo.png';
+        logoEl.src = '/bt-logo.svg';
       }
       if (subNameEl && (!s.panel_name || s.panel_name === 'Angelillo15' || s.panel_name === 'BT Panel' || subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('Server Engine') || subNameEl.innerText.includes('PteroX'))) {
         subNameEl.innerText = 'DezerX Vulcan Cloud';
@@ -1236,7 +1236,7 @@ class App {
     } else {
       document.documentElement.classList.add('theme-nook');
       if (logoEl && (!s.panel_logo || s.panel_logo === '/assets/mpanel-logo.svg' || s.panel_logo === '/arix/Arix.png' || s.panel_logo === '/assets/liquidx-logo.svg' || s.panel_logo === '/images/pterox-header-logo.webp')) {
-        logoEl.src = '/assets/logo.png';
+        logoEl.src = '/bt-logo.svg';
       }
       if (subNameEl && (subNameEl.innerText.includes('Theme') || subNameEl.innerText.includes('PteroX'))) {
         subNameEl.innerText = 'BT Panel Server Engine';
