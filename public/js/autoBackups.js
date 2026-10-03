@@ -1,5 +1,5 @@
 /**
- * AutoBackups Client Extension Module for Mpanel
+ * AutoBackups Client Extension Module for BT Panel
  * Ported from autobackups.blueprint (v1.0 by makkmarci13)
  */
 class AutoBackupsClient {
