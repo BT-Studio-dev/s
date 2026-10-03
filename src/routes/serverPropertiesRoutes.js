@@ -48,7 +48,7 @@ function parseProperties(content) {
 }
 
 function serializeProperties(properties) {
-  let header = `# Minecraft server properties (Managed by Mpanel & Arix Addon Pack)\n# ${new Date().toISOString()}\n`;
+  let header = `# Minecraft server properties (Managed by BT Panel & Arix Addon Pack)\n# ${new Date().toISOString()}\n`;
   const lines = [header];
 
   for (const [key, val] of Object.entries(properties)) {
@@ -71,7 +71,7 @@ router.get('/', authenticate, requireServerAccess('files.read'), async (req, res
 
     if (!fs.existsSync(propsPath)) {
       // Create default server.properties if not present
-      const defaultContent = `motd=A Minecraft Server Powered by Mpanel
+      const defaultContent = `motd=A Minecraft Server Powered by BT Panel
 server-port=25565
 gamemode=survival
 difficulty=easy
@@ -158,7 +158,7 @@ router.get('/subdomains', authenticate, requireServerAccess('settings.view'), as
 router.post('/subdomains', authenticate, requireServerAccess('settings.edit'), async (req, res) => {
   try {
     const serverId = req.params.serverId;
-    const { prefix, domain = 'mpanel.network' } = req.body;
+    const { prefix, domain = 'btpanel.network' } = req.body;
 
     if (!prefix) {
       return res.status(400).json({ success: false, error: 'Subdomain prefix is required.' });
