@@ -999,11 +999,11 @@ class SettingsManager {
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-semibold text-slate-300 mb-1">Panel Name</label>
-                  <input type="text" id="set-panel-name" oninput="settingsManager.previewPanelName(this.value)" class="w-full glass-input px-3.5 py-2.5 rounded-xl text-xs" placeholder="Mpanel">
+                  <input type="text" id="set-panel-name" oninput="settingsManager.previewPanelName(this.value)" class="w-full glass-input px-3.5 py-2.5 rounded-xl text-xs" placeholder="BT Panel">
                 </div>
                 <div>
                   <label class="block text-xs font-semibold text-slate-300 mb-1">Favicon Title Name</label>
-                  <input type="text" id="set-favicon-name" class="w-full glass-input px-3.5 py-2.5 rounded-xl text-xs" placeholder="Mpanel Server Management">
+                  <input type="text" id="set-favicon-name" class="w-full glass-input px-3.5 py-2.5 rounded-xl text-xs" placeholder="BT Panel Server Management">
                 </div>
               </div>
 
@@ -1096,7 +1096,7 @@ class SettingsManager {
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-semibold text-slate-300 mb-1">Company / Organization Name</label>
-                  <input type="text" id="set-company-name" class="w-full glass-input px-3.5 py-2.5 rounded-xl text-xs" placeholder="Mpanel Game Host">
+                  <input type="text" id="set-company-name" class="w-full glass-input px-3.5 py-2.5 rounded-xl text-xs" placeholder="BT Panel Game Host">
                   <p class="text-[10px] text-slate-400 mt-1">Used throughout panel headers and notification communications.</p>
                 </div>
 
@@ -1261,7 +1261,7 @@ class SettingsManager {
                     <img id="preview-logo-img" src="/assets/logo.png" alt="Preview Logo" class="w-full h-full object-contain">
                   </div>
                   <div>
-                    <h4 id="preview-panel-title" class="text-sm font-bold text-white">Mpanel</h4>
+                    <h4 id="preview-panel-title" class="text-sm font-bold text-white">BT Panel</h4>
                     <p class="text-[10px] text-slate-400">Glassmorphism UI Engine</p>
                   </div>
                 </div>
@@ -1372,8 +1372,8 @@ class SettingsManager {
       const data = await app.api('/api/admin/settings');
       const s = data.settings || {};
 
-      document.getElementById('set-panel-name').value = s.panel_name || 'Mpanel';
-      document.getElementById('set-favicon-name').value = s.favicon_name || 'Mpanel';
+      document.getElementById('set-panel-name').value = s.panel_name || 'BT Panel';
+      document.getElementById('set-favicon-name').value = s.favicon_name || 'BT Panel';
       document.getElementById('set-panel-logo').value = s.panel_logo || '';
       document.getElementById('set-favicon-logo').value = s.favicon_logo || '';
 
@@ -2404,9 +2404,9 @@ class SettingsManager {
 
   previewPanelName(name) {
     const el = document.getElementById('preview-panel-title');
-    if (el) el.innerText = name || 'Mpanel';
+    if (el) el.innerText = name || 'BT Panel';
     const headerTitle = document.getElementById('header-panel-name');
-    if (headerTitle) headerTitle.innerText = name || 'Mpanel';
+    if (headerTitle) headerTitle.innerText = name || 'BT Panel';
   }
 
   previewLogo(url) {
@@ -2494,8 +2494,8 @@ class SettingsManager {
 
   async saveSettings(isSilent = false) {
     const payload = {
-      panel_name: document.getElementById('set-panel-name')?.value.trim() || 'Mpanel',
-      favicon_name: document.getElementById('set-favicon-name')?.value.trim() || 'Mpanel',
+      panel_name: document.getElementById('set-panel-name')?.value.trim() || 'BT Panel',
+      favicon_name: document.getElementById('set-favicon-name')?.value.trim() || 'BT Panel',
       panel_logo: document.getElementById('set-panel-logo')?.value.trim() || '',
       favicon_logo: document.getElementById('set-favicon-logo')?.value.trim() || '',
       panel_bg: this.currentTheme.bg || '',
@@ -2512,7 +2512,7 @@ class SettingsManager {
       registration_enabled: document.getElementById('set-registration')?.checked ? '1' : '0',
       tutorials_enabled: document.getElementById('set-tutorials-enabled')?.checked ? '1' : '0',
       tutorials_autostart_enabled: document.getElementById('set-tutorials-autostart-enabled')?.checked ? '1' : '0',
-      company_name: document.getElementById('set-company-name')?.value.trim() || 'Mpanel',
+      company_name: document.getElementById('set-company-name')?.value.trim() || 'BT Panel',
       two_factor_requirement: document.getElementById('set-twofa-requirement')?.value || '0',
       default_language: document.getElementById('set-default-language')?.value || 'en',
       admin_theme: document.getElementById('set-admin-theme')?.value || 'default',
