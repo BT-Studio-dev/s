@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NEBULA THEME v2.0 FOR MPANEL
+   NEBULA THEME v2.0 FOR BT PANEL
    Ported from Nebula Blueprint (prplwtf / Nobita-Cloud)
    Fully unlocked, with Live Visual Customizer & Dynamic Real-time CSS Properties
    ========================================================================== */
@@ -40,7 +40,7 @@ html.theme-nebula,
   --borderRadiusSidebar: 12px;
   --patternSizeDashboard: 180px;
 
-  /* Mpanel Cyber Bridges */
+  /* BT Panel Cyber Bridges */
   --card-opacity: 0.9;
   --card-blur: 16px;
 }
