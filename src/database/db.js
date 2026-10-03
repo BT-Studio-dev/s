@@ -446,7 +446,7 @@ async function initDatabase() {
   // Seed default Admin Settings (from settings.zip: basic & advanced)
   try {
     const adminDefaults = [
-      { key: 'company_name', value: 'Mpanel', type: 'string', desc: 'Panel company/organization name' },
+      { key: 'company_name', value: 'BT Panel', type: 'string', desc: 'Panel company/organization name' },
       { key: 'two_factor_requirement', value: '0', type: 'string', desc: 'Require 2FA: 0=Not Required, 1=Admin Only, 2=All Users' },
       { key: 'default_language', value: 'en', type: 'string', desc: 'Default UI language' },
       { key: 'admin_theme', value: 'default', type: 'string', desc: 'Admin theme: default or hyperv1' },
