@@ -5,7 +5,7 @@ const BASE_URL = 'http://localhost:3001';
 const DAEMON_URL = 'http://localhost:3003';
 
 async function runTests() {
-  console.log('🚀 Starting Mpanel End-to-End Test Suite...\n');
+  console.log('🚀 Starting BT Panel End-to-End Test Suite...\n');
   let token = '';
 
   // Test 1: Public settings
@@ -33,7 +33,7 @@ async function runTests() {
   // Test 3: Update Settings (Transparency, Blur, Wallpaper, Music)
   try {
     const res = await axios.put(`${BASE_URL}/api/admin/settings`, {
-      panel_name: 'Mpanel',
+      panel_name: 'BT Panel',
       transparency_bar: '20',
       blur_bar: '18',
       panel_bg_category: 'black-dark'
@@ -96,7 +96,7 @@ async function runTests() {
     // Write file
     await axios.post(`${BASE_URL}/api/servers/${nodeServerId}/files/content`, {
       filePath: 'config.json',
-      content: JSON.stringify({ app: 'Mpanel', version: '1.0' }, null, 2)
+      content: JSON.stringify({ app: 'BT Panel', version: '1.0' }, null, 2)
     }, authHeaders);
     console.log('✅ Test 7b: File manager created config.json.');
 
@@ -159,7 +159,7 @@ async function runTests() {
     console.error('❌ Test 10 SFTP Failed:', e.message);
   }
 
-  console.log('\n🎉 All Mpanel automated verification tests completed successfully!');
+  console.log('\n🎉 All BT Panel automated verification tests completed successfully!');
 }
 
 runTests().catch(console.error);
