@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('⚡ Building Mpanel...');
+console.log('⚡ Building BT Panel...');
 
 const dirs = [
   path.join(__dirname, '../data'),
@@ -19,5 +19,5 @@ for (const dir of dirs) {
   }
 }
 
-console.log('✅ Mpanel build and directory check complete! Ready for PM2 / production.');
+console.log('✅ BT Panel build and directory check complete! Ready for PM2 / production.');
 
