@@ -56,7 +56,7 @@ class WorldService {
         category: 'Building / Utility',
         tag: 'Void World',
         genre: 'utility',
-        author: 'Mpanel Studio',
+        author: 'BT Panel Studio',
         version: 'All Versions',
         sizeFormatted: '350 KB',
         icon: '🌌',
@@ -116,7 +116,7 @@ class WorldService {
         category: 'Creative Sandbox',
         tag: 'Creative',
         genre: 'utility',
-        author: 'Mpanel Studio',
+        author: 'BT Panel Studio',
         version: 'All Versions',
         sizeFormatted: '400 KB',
         icon: '🟩',
@@ -845,7 +845,7 @@ class WorldService {
       } catch (err) {
         // Fallback: If external download fails, setup clean structured world with template notes
         fs.mkdirSync(path.join(targetDir, 'datapacks'), { recursive: true });
-        fs.writeFileSync(path.join(targetDir, 'world_template.txt'), `Mpanel World Template: ${map.title}\nCategory: ${map.category}\nInstalled: ${new Date().toISOString()}`);
+        fs.writeFileSync(path.join(targetDir, 'world_template.txt'), `BT Panel World Template: ${map.title}\nCategory: ${map.category}\nInstalled: ${new Date().toISOString()}`);
       }
 
       if (setActive) {
@@ -892,7 +892,7 @@ class WorldService {
       responseType: 'stream',
       timeout: 60000,
       headers: {
-        'User-Agent': 'Mpanel-World-Installer/1.0.0'
+        'User-Agent': 'BT-Panel-World-Installer/1.0.0'
       }
     });
 
