@@ -1,4 +1,4 @@
-// Mpanel Minecraft World Manager Module
+// BT Panel Minecraft World Manager Module
 class WorldManagerController {
   constructor() {
     this.currentServerId = null;
