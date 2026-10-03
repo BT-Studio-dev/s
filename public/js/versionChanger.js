@@ -1,4 +1,4 @@
-// Mpanel Minecraft Version Changer Module
+// BT Panel Minecraft Version Changer Module
 class VersionChanger {
   constructor() {
     this.currentServerId = null;
