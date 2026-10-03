@@ -1,5 +1,5 @@
 /**
- * Mpanel - System Updates & Auto-Detection Engine
+ * BT Panel - System Updates & Auto-Detection Engine
  * Real-time GitHub Releases Tracker & Live Update Terminal
  * Source: https://github.com/nobita329/Mpanel/releases
  */
@@ -92,7 +92,7 @@ class UpdatesManager {
             <div>
               <h3 id="card-latest-ver" class="text-3xl font-black text-cyan-400 font-mono">v2.4.0</h3>
               <p class="text-[11px] text-slate-400 mt-1 truncate" id="card-latest-title">
-                Mpanel Release
+                BT Panel Release
               </p>
             </div>
             <div class="text-[10px] text-slate-500 font-mono border-t border-white/5 pt-2 flex justify-between">
@@ -137,7 +137,7 @@ class UpdatesManager {
               </div>
               <span class="text-xs font-mono font-bold text-slate-300 flex items-center gap-2">
                 <i data-lucide="terminal" class="w-4 h-4 text-cyan-400"></i>
-                <span>bash - root@mpanel:~/Mpanel (Live Update Terminal)</span>
+                <span>bash - root@btpanel:~/Mpanel (Live Update Terminal)</span>
               </span>
             </div>
 
@@ -253,7 +253,7 @@ class UpdatesManager {
                 <i data-lucide="history" class="w-5 h-5 text-amber-400"></i>
                 <span>Release History</span>
               </h3>
-              <p class="text-xs text-slate-400">Past version releases and changelogs for Mpanel</p>
+              <p class="text-xs text-slate-400">Past version releases and changelogs for BT Panel</p>
             </div>
             <span class="text-xs font-mono text-slate-400">nobita329/Mpanel</span>
           </div>
@@ -328,7 +328,7 @@ class UpdatesManager {
       });
 
       // Write welcome banner in terminal
-      this.term.writeln('\x1b[1;36m=== Mpanel System Update Terminal Initialized ===\x1b[0m');
+      this.term.writeln('\x1b[1;36m=== BT Panel System Update Terminal Initialized ===\x1b[0m');
       this.term.writeln('\x1b[90mReady to stream live system updates, migrations, and process reloads.\x1b[0m\r\n');
 
     } else {
@@ -336,7 +336,7 @@ class UpdatesManager {
       const fallback = document.getElementById('update-terminal-fallback');
       if (fallback) {
         fallback.classList.remove('hidden');
-        fallback.textContent = '=== Mpanel System Update Terminal (Fallback Mode) ===\nReady.\n';
+        fallback.textContent = '=== BT Panel System Update Terminal (Fallback Mode) ===\nReady.\n';
       }
     }
   }
@@ -772,7 +772,7 @@ class UpdatesManager {
           </div>
 
           <div class="space-y-3 text-xs text-slate-300">
-            <p>You are about to run the automated Mpanel system update pipeline.</p>
+            <p>You are about to run the automated BT Panel system update pipeline.</p>
             <div class="p-3 rounded-xl bg-slate-950/80 border border-white/5 space-y-1.5 font-mono text-[11px]">
               <div class="text-slate-400 font-bold uppercase tracking-wider mb-1">Pipeline Stages:</div>
               <div class="flex items-center gap-2 text-emerald-400"><i data-lucide="check" class="w-3.5 h-3.5"></i> 1. Git pull from repository (main)</div>
