@@ -1,5 +1,5 @@
 /**
- * Mpanel Discord Live Profile Detector & Real-time Presence Engine
+ * BT Panel Discord Live Profile Detector & Real-time Presence Engine
  * Developer ID: 924366651443527710 (Nobita / nobita.dev)
  * Website: https://nobitahost.in/
  */
@@ -59,7 +59,7 @@
     }
 
     async init() {
-      // 1. Initial local fetch from Mpanel server API
+      // 1. Initial local fetch from BT Panel server API
       await this.fetchServerProfile();
 
       // 2. Connect to Lanyard WebSocket for instant real-time pushes
