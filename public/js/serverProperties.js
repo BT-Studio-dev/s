@@ -268,7 +268,7 @@ class ServerProperties {
               <label class="block text-xs font-semibold text-slate-300 mb-1">Subdomain Prefix</label>
               <div class="flex items-center">
                 <input type="text" id="new-subdomain-prefix" placeholder="play" class="flex-1 glass-input px-3.5 py-2 rounded-l-xl text-xs font-mono" required>
-                <span class="px-3 py-2 bg-slate-800 text-slate-400 border-t border-b border-r border-white/10 rounded-r-xl text-xs font-mono">.mpanel.network</span>
+                <span class="px-3 py-2 bg-slate-800 text-slate-400 border-t border-b border-r border-white/10 rounded-r-xl text-xs font-mono">.btpanel.network</span>
               </div>
               <p class="text-[10px] text-slate-500 mt-1">Alphanumeric and dashes only. Example: <code>play</code> or <code>smp</code></p>
             </div>
