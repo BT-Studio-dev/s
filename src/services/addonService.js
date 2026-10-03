@@ -356,7 +356,7 @@ class AddonService {
       const url = `https://api.github.com/repos/pterodactyl/${repoName}/git/trees/main?recursive=1`;
       const res = await axios.get(url, {
         headers: {
-          'User-Agent': 'Mpanel-ArixAddonPack/2.0.2',
+          'User-Agent': 'BT-Panel-ArixAddonPack/2.0.2',
           'Accept': 'application/vnd.github.v3+json'
         },
         timeout: 10000
