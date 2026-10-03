@@ -1,4 +1,4 @@
-// Mpanel Authentication Controller
+// BT Panel Authentication Controller
 class AuthController {
   showLoginModal() {
     const modalContainer = document.getElementById('modal-container');
@@ -7,7 +7,7 @@ class AuthController {
 
     const activeTheme = localStorage.getItem('mpanel_active_theme') || 'arix';
     const isPterox = activeTheme === 'pterox';
-    const brandName = isPterox ? (localStorage.getItem('pterox_brand_name') || 'PteroX') : 'Mpanel';
+    const brandName = isPterox ? (localStorage.getItem('pterox_brand_name') || 'PteroX') : 'BT Panel';
     const loginLogo = isPterox ? (localStorage.getItem('pterox_login_logo') || '/images/pterox-login-logo.webp') : null;
 
     modalContainer.innerHTML = `
@@ -35,7 +35,7 @@ class AuthController {
 
             <div>
               <label class="block text-xs font-semibold text-slate-300 mb-1">Username or Email</label>
-              <input type="text" id="login-username" class="w-full glass-input px-3.5 py-2.5 rounded-xl text-xs" placeholder="admin or admin@mpanel.local" autocapitalize="none" autocorrect="off" autocomplete="username" required autofocus>
+              <input type="text" id="login-username" class="w-full glass-input px-3.5 py-2.5 rounded-xl text-xs" placeholder="admin or admin@btpanel.local" autocapitalize="none" autocorrect="off" autocomplete="username" required autofocus>
             </div>
             <div>
               <div class="flex justify-between items-center mb-1">
@@ -82,7 +82,7 @@ class AuthController {
 
     const activeTheme = localStorage.getItem('mpanel_active_theme') || 'arix';
     const isPterox = activeTheme === 'pterox';
-    const brandName = isPterox ? (localStorage.getItem('pterox_brand_name') || 'PteroX') : 'Mpanel';
+    const brandName = isPterox ? (localStorage.getItem('pterox_brand_name') || 'PteroX') : 'BT Panel';
     const loginLogo = isPterox ? (localStorage.getItem('pterox_login_logo') || '/images/pterox-login-logo.webp') : null;
 
     modalContainer.innerHTML = `
