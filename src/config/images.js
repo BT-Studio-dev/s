@@ -1,4 +1,4 @@
-// Mpanel Supported Docker Images & Templates
+// BT Panel Supported Docker Images & Templates
 module.exports = {
   minecraft: [
     { label: "Java 26", value: "ghcr.io/pterodactyl/yolks:java_26", defaultCmd: "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}} nogui", jarFile: "server.jar" },
