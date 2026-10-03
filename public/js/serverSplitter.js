@@ -1,5 +1,5 @@
 /**
- * Mpanel - Server Splitter Module
+ * BT Panel - Server Splitter Module
  * Ported from serversplitter.blueprint (v1.1.4 by 0x7d8 / nobita329)
  * Allows splitting master server resources (RAM, CPU, Disk) into independent sub-servers.
  */
