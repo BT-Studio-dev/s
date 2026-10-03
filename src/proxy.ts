@@ -1,8 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-
 const SESSION_COOKIE = "btp_session";
-
 
 /**
  * Presence check only — deliberately no database work, so this stays cheap and
@@ -19,13 +17,11 @@ export function proxy(req: NextRequest) {
   if (req.cookies.has(SESSION_COOKIE)) return NextResponse.next();
   if (req.headers.get("authorization")) return NextResponse.next();
 
-
   const url = req.nextUrl.clone();
   url.pathname = "/login";
   url.search = "";
   return NextResponse.redirect(url);
 }
-
 
 export const config = {
   // Panel pages only. /api routes guard themselves with requireUser/requireAdmin,
@@ -38,3 +34,12 @@ export const config = {
     "/account/:path*",
     "/users/:path*",
     "/updates/:path*",
+    "/settings/:path*",
+    "/admin/:path*",
+    "/apikeys/:path*",
+    "/locations/:path*",
+    "/nodes/:path*",
+    "/nests/:path*",
+    "/mounts/:path*",
+  ],
+};
