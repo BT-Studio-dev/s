@@ -44,7 +44,7 @@ const serverAddonRoutes = require('./routes/serverAddonRoutes');
 
 
 async function bootstrap() {
-  console.log('🚀 Initializing Mpanel Core Engine...');
+  console.log('🚀 Initializing BT Panel Core Engine...');
 
   // Initialize DB & Seed
   await initDatabase();
@@ -133,7 +133,7 @@ async function bootstrap() {
 
   console.log(`
 ╔══════════════════════════════════════════════════════╗
-║               🎮 MPANEL READY TO USE                 ║
+║               🎮 BT PANEL READY TO USE                 ║
 ╠══════════════════════════════════════════════════════╣
 ║  • Web Panel UI:    http://localhost:${config.PORT_WEB}            ║
 ║  • Daemon/API Port: http://localhost:${config.PORT_API}            ║
