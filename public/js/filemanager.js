@@ -1,5 +1,5 @@
 // ==========================================================================
-// Better Files Manager v3.5 (SAGA / Pterodactyl Edition for Mpanel)
+// Better Files Manager v3.5 (SAGA / Pterodactyl Edition for BT Panel)
 // Features: Collapsible Tree Explorer, Live Search, Multi-Item Batch Actions,
 //           Pull from URL, Git Manager, Trash Bin, Permissions Calculator,
 //           File Properties & SHA256, Code Beautifier, and Media Viewer Studio.
