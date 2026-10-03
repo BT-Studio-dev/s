@@ -65,7 +65,7 @@ class AdminManager {
           </div>
         </div>
 
-        <!-- Mpanel System Version & Auto-Detect Update Banner -->
+        <!-- BT Panel System Version & Auto-Detect Update Banner -->
         <div class="glass-card p-4 rounded-2xl border border-white/10 relative overflow-hidden bg-gradient-to-r from-purple-950/30 via-slate-900/60 to-cyan-950/30 shadow-lg">
           <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div class="flex items-center gap-3.5">
@@ -75,7 +75,7 @@ class AdminManager {
               <div class="space-y-1">
                 <div class="flex items-center gap-2 flex-wrap">
                   <span class="text-sm font-black text-white flex items-center gap-1.5">
-                    Mpanel Server Engine <span class="font-mono text-purple-300" id="adm-banner-version">v2.4.0</span>
+                    BT Panel Server Engine <span class="font-mono text-purple-300" id="adm-banner-version">v2.4.0</span>
                   </span>
                   <span id="adm-banner-status-tag" class="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400" id="adm-banner-status-dot"></span>
@@ -463,7 +463,7 @@ class AdminManager {
         if (res.has_update) {
           app.toast(`New version ${res.latest_version} available!`, 'info');
         } else {
-          app.toast(`Mpanel is up to date (${res.latest_version || 'v2.4.0'}).`, 'success');
+          app.toast(`BT Panel is up to date (${res.latest_version || 'v2.4.0'}).`, 'success');
         }
         await this.fetchOverviewTelemetry(true);
       }
