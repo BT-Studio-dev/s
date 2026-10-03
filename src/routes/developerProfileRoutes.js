@@ -58,7 +58,7 @@ async function fetchDeveloperProfile() {
   // 1. Try Lanyard API
   try {
     const lanyardRes = await fetch(`https://api.lanyard.rest/v1/users/${DEVELOPER_ID}`, {
-      headers: { 'User-Agent': 'Mpanel-Live-Profile/1.0' },
+      headers: { 'User-Agent': 'BT-Panel-Live-Profile/1.0' },
       signal: AbortSignal.timeout(3000)
     });
     if (lanyardRes.ok) {
@@ -101,7 +101,7 @@ async function fetchDeveloperProfile() {
       const discordRes = await fetch(`https://discord.com/api/v10/users/${DEVELOPER_ID}`, {
         headers: {
           Authorization: `Bot ${botToken}`,
-          'User-Agent': 'Mpanel-Live-Profile/1.0'
+          'User-Agent': 'BT-Panel-Live-Profile/1.0'
         },
         signal: AbortSignal.timeout(3000)
       });
