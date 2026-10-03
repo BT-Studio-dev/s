@@ -35,7 +35,7 @@ module.exports = {
   SERVER_DB_DATABASE: process.env.SERVER_DB_DATABASE || 'mydatabase',
 
   // Panel Defaults
-  DEFAULT_PANEL_NAME: process.env.PANEL_NAME || 'Mpanel',
+  DEFAULT_PANEL_NAME: process.env.PANEL_NAME || 'BT Panel',
   DEFAULT_THEME: {
     transparency: 18, // 0 - 100%
     blur: 16,        // 0 - 40px
