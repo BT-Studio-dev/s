@@ -37,7 +37,7 @@ export function AuthShell({
       <main className="relative z-10 flex min-h-dvh flex-col items-center justify-center px-4 py-10">
         <div className="glass glass-strong view-enter w-full max-w-[380px] px-8 py-8 text-center">
           <div className="mb-5 flex flex-col items-center gap-3">
-            <BrandMark className="size-12 drop-shadow-[0_0_18px_var(--accent-glow)]" src={panelLogo || undefined} />
+            <BrandMark className="size-12 drop-shadow-[0_0_18px_var(--accent-glow)]" src={panelLogo || "/bt-logo.svg"} />
             <div>
               <h1 className="text-[21px] font-extrabold tracking-tight text-ice">{heading}</h1>
               {subtitle ? <p className="mt-1 text-[12.5px] font-semibold text-steel">{subtitle}</p> : null}
