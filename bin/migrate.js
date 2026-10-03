@@ -3,7 +3,7 @@ const { initDatabase, query } = require('../src/database/db');
 const { seedDatabase } = require('../src/database/seed');
 
 async function migrate() {
-  console.log('🔄 Running Mpanel Database Migrations (MariaDB / MySQL)...');
+  console.log('🔄 Running BT Panel Database Migrations (MariaDB / MySQL)...');
   
   try {
     // 1. Initialize all core tables
