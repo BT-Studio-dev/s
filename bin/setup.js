@@ -40,7 +40,7 @@ async function main() {
     }
   };
 
-  log('⚡ Initializing Mpanel Automated Setup...');
+  log('⚡ Initializing BT Panel Automated Setup...');
 
   // 1. Ensure required runtime directories exist
   const dirs = [
@@ -63,8 +63,8 @@ async function main() {
   let envCreated = false;
   if (!fs.existsSync(envPath)) {
     const jwtSecret = crypto.randomBytes(32).toString('hex');
-    const envContent = `# Mpanel Configuration Environment
-PANEL_NAME=Mpanel
+    const envContent = `# BT Panel Configuration Environment
+PANEL_NAME=BT Panel
 NODE_ENV=production
 PORT_WEB=3001
 PORT_API=3003
@@ -109,7 +109,7 @@ SERVER_DB_DATABASE=mydatabase
   if (options.adminUser && options.adminPass) {
     const username = options.adminUser.trim();
     const password = options.adminPass.trim();
-    const email = options.adminEmail ? options.adminEmail.trim() : `${username}@mpanel.local`;
+    const email = options.adminEmail ? options.adminEmail.trim() : `${username}@btpanel.local`;
     const passwordHash = await bcrypt.hash(password, 10);
     const uuid = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2, 15);
 
@@ -155,14 +155,14 @@ SERVER_DB_DATABASE=mydatabase
       admin: adminDetails
     }));
   } else {
-    log('✅ Mpanel automated setup completed successfully!');
+    log('✅ BT Panel automated setup completed successfully!');
   }
 
   process.exit(0);
 }
 
 main().catch((err) => {
-  console.error('❌ Mpanel setup error:', err);
+  console.error('❌ BT Panel setup error:', err);
   process.exit(1);
 });
 
