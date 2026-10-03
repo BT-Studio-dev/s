@@ -54,7 +54,7 @@ PORT=3001 npm start
 For a separate VPS, `deploy/setup-debian.sh` installs Node.js 22, MariaDB, Nginx, and Certbot, then runs the app behind Nginx. Point a DNS A/AAAA record at the VPS first if you want HTTPS on the first pass:
 
 ```bash
-git clone https://github.com/lie-kg1/BT-Panel.git /opt/src
+git clone https://github.com/BT-Studio-dev/s.git /opt/src
 cd /opt/src
 sudo bash deploy/setup-debian.sh panel.example.com
 ```
