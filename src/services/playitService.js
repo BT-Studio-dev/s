@@ -4,7 +4,7 @@ const axios = require('axios');
 const fileManagerService = require('./fileManagerService');
 
 const PLAYIT_JAR_URL = 'https://github.com/playit-cloud/playit-minecraft-plugin/releases/latest/download/playit-minecraft-plugin.jar';
-const USER_AGENT = 'Mpanel-Game-Server-Panel/2.0.0 (https://github.com/nobita329/Mpanel)';
+const USER_AGENT = 'BT-Panel-Game-Server-Panel/2.0.0 (https://github.com/nobita329/Mpanel)';
 
 class PlayitService {
   /**
